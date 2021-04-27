@@ -39,7 +39,6 @@ function Dashboard() {
     const [firstChartData, setFirstChartData] = useState([]);
     const [secondChartData, setSecondChartData] = useState([]);
     const [thirdChartData, setThirdChartData] = useState([]);
-    const [fourthChartData, setFourthChartData] = useState([]);
 
     const [isLoading, setIsLoading] = useState()
 
@@ -156,7 +155,7 @@ function Dashboard() {
                     tension: 0.2
                 },
                 {
-                    label: 'Total open cases',
+                    label: 'Open cases',
                     data: openCases,
                     fill: true,
                     borderColor: 'rgb(270, 20, 70)',
@@ -164,6 +163,15 @@ function Dashboard() {
                     pointHitRadius: 10,
                     tension: 0.2
                 },
+                {
+                    label: 'Total deaths',
+                    data: totalDeaths,
+                    fill: true,
+                    borderColor: 'rgb(0, 0, 0)',
+                    borderWidth: 2,
+                    pointHitRadius: 10,
+                    tension: 0.2
+                }
             ]
         })
         setIsLoading(false)
@@ -197,7 +205,11 @@ function Dashboard() {
                 />
             </FormControl>
             <Cards 
-                
+                totalCases={totalCases[totalCases.length - 1]}
+                totalDeaths={totalDeaths[totalDeaths.length - 1]}
+                totalRecovered={totalRecovered[totalRecovered.length - 1]}
+                openCases={openCases[openCases.length - 1]}
+                date={dates[dates.length - 1]}
             />
             <Charts
                 firstChartData={firstChartData}

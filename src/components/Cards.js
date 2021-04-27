@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function Cards() {
+function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date }) {
     const classes = useStyles()
     return (
         <div className={classes.root}>
@@ -54,8 +54,8 @@ function Cards() {
                         className={classes.card, classes.firstCard}
                     >
                         <CardContent>
-                            <Typography className={classes.cardTitle}>Total cases</Typography>
-                            <Typography className={classes.cardData}>2000000</Typography>
+                            <Typography className={classes.cardTitle}>Total cases - {date}</Typography>
+                            <Typography className={classes.cardData}>{totalCases}</Typography>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -68,8 +68,8 @@ function Cards() {
                         className={classes.card, classes.secondCard}
                     >
                         <CardContent>
-                            <Typography className={classes.cardTitle}>Total deaths</Typography>
-                            <Typography className={classes.cardData}>70000</Typography>
+                            <Typography className={classes.cardTitle}>Total deaths - {date}</Typography>
+                            <Typography className={classes.cardData}>{totalDeaths}</Typography>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -82,8 +82,8 @@ function Cards() {
                         className={classes.card, classes.thirdCard}
                     >
                         <CardContent>
-                            <Typography className={classes.cardTitle}>Today recovered</Typography>
-                            <Typography className={classes.cardData}>20193</Typography>
+                            <Typography className={classes.cardTitle}>Today recovered - {date}</Typography>
+                            <Typography className={classes.cardData}>{totalRecovered}</Typography>
                         </CardContent>
                     </Card>
                 </Grid>
@@ -96,8 +96,8 @@ function Cards() {
                         className={classes.card, classes.fourthCard}
                     >
                         <CardContent>
-                            <Typography className={classes.cardTitle}>Open cases</Typography>
-                            <Typography className={classes.cardData}>20902</Typography>
+                            <Typography className={classes.cardTitle}>Open cases - {date}</Typography>
+                            <Typography className={classes.cardData}>{openCases}</Typography>
                         </CardContent>
                     </Card>
                 </Grid>
