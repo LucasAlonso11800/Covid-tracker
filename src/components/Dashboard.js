@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
+import Charts from './Charts'
+
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, InputLabel, MenuItem, FormControl, Select, TextField } from '@material-ui/core';
-import { Bar, Line } from 'react-chartjs-2';
+import { InputLabel, MenuItem, FormControl, Select, TextField } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
     text: {
@@ -26,8 +27,8 @@ const useStyles = makeStyles(() => ({
 function Dashboard() {
     const currentDate = new Date();
 
-    const [date, setDate] = useState();
-    const [country, setCountry] = useState('');
+    const [date, setDate] = useState(currentDate);
+    const [country, setCountry] = useState('Argentina');
     const [countries, setCountries] = useState([]);
     const [dates, setDates] = useState([]);
     const [cases, setCases] = useState([]);
@@ -44,20 +45,23 @@ function Dashboard() {
 
     const initialURL = 'https://api.covid19tracking.narrativa.com/api';
 
+    function dateToString(date){
+        return date.toISOString().substring(0, 10)
+    };
+
     // GET COUNTRY LIST
     useEffect(() => {
-        const today = currentDate.toISOString().substring(0, 10);
-        axios.get(`${initialURL}/${today}`)
-            .then(res => setCountries(Object.keys(res.data.dates[today].countries)))
+        axios.get(`${initialURL}/${dateToString(currentDate)}`)
+            .then(res => setCountries(Object.keys(res.data.dates[dateToString(currentDate)].countries)))
             .catch(err => console.log(err))
     }, []);
+
     // GET DATA
     useEffect(() => {
-        const secondDate = new Date();
+        const secondDate = new Date(date.valueOf());
         secondDate.setMonth(date.getMonth() - 1);
-        const previousDate = secondDate.toISOString().substring(0, 10);
 
-        axios.get(`${initialURL}/country/${country.toLowerCase()}?date_from=${previousDate}&date_to=${date.toISOString().substring(0, 10)}`)
+        axios.get(`${initialURL}/country/${country.toLowerCase()}?date_from=${dateToString(secondDate)}&date_to=${dateToString(date)}`)
             .then(res => {
                 setDates(Object.keys(res.data.dates));
                 const data = Object.values(res.data.dates);
@@ -90,6 +94,7 @@ function Dashboard() {
             })
             .catch(err => console.log(err));
     }, [date, country]);
+
     // FIRST CHART
     useEffect(() => {
         setFirstChartData({
@@ -115,6 +120,7 @@ function Dashboard() {
                 }]
         })
     }, [dates, cases, recovered])
+    
     // SECOND CHART
     useEffect(() => {
         setSecondChartData({
@@ -131,6 +137,7 @@ function Dashboard() {
                 }]
         })
     }, [dates, deaths])
+    
     // THIRD CHART
     useEffect(() => {
         setThirdChartData({
@@ -166,6 +173,7 @@ function Dashboard() {
             ]
         })
     }, [dates, totalCases, totalRecovered, openCases]);
+    
     // FOURTH CHART
     useEffect(() => {
         setFourthChartData({
@@ -207,76 +215,14 @@ function Dashboard() {
                     type='date'
                     onChange={e => setDate(new Date(e.target.value))}
                 />
-                {/* <Button onClick={() => getData()}>
-                    Get data
-                    </Button> */}
             </FormControl>
 
-            <Grid
-                container
-                className={classes.gridContainer}
-                justify='space-around'
-                alignItems='center'
-            >
-                <Grid
-                    className={classes.gridItem}
-                    item
-                    xs={10}
-                    sm={5}
-                >
-                    <Line
-                        className='chart'
-                        data={firstChartData}
-                        options={{
-                            maintainAspectRatio: false,
-
-                        }}
-                    />
-                </Grid>
-                <Grid
-                    className={classes.gridItem}
-                    item
-                    xs={10}
-                    sm={5}
-                >
-                    <Bar
-                        className='chart'
-                        data={secondChartData}
-                        options={{
-                            maintainAspectRatio: false
-                        }}
-                    />
-                </Grid>
-                <Grid
-                    className={classes.gridItem}
-                    item
-                    xs={10}
-                    sm={5}
-                >
-                    <Line
-                        className='chart'
-                        data={thirdChartData}
-                        options={{
-                            maintainAspectRatio: false,
-
-                        }}
-                    />
-                </Grid>
-                <Grid
-                    className={classes.gridItem}
-                    item
-                    xs={10}
-                    sm={5}
-                >
-                    <Bar
-                        className='chart'
-                        data={fourthChartData}
-                        options={{
-                            maintainAspectRatio: false
-                        }}
-                    />
-                </Grid>
-            </Grid>
+            <Charts
+                firstChartData={firstChartData}
+                secondChartData={secondChartData}
+                thirdChartData={thirdChartData}
+                fourthChartData={fourthChartData}
+            />
         </div>
     )
 };
