@@ -210,6 +210,7 @@ function Dashboard() {
                 totalRecovered={totalRecovered[totalRecovered.length - 1]}
                 openCases={openCases[openCases.length - 1]}
                 date={dates[dates.length - 1]}
+                isLoading={isLoading}
             />
             <Charts
                 firstChartData={firstChartData}

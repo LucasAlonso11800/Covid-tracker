@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid, Card, CardContent, Typography } from '@material-ui/core';
+import { Grid, Card, CardContent, Typography, CircularProgress } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -13,6 +13,10 @@ const useStyles = makeStyles((theme) => ({
     },
     card: {
         padding: '0.5em 0.25em',
+    },
+    cardContent: {
+        display: 'flex',
+        flexDirection: 'column'
     },
     cardTitle: {
         fontSize: '0.75rem',
@@ -33,10 +37,15 @@ const useStyles = makeStyles((theme) => ({
     },
     fourthCard: {
         backgroundColor: theme.palette.error.main
+    },
+    progress: {
+        color: '#ffffff',
+        justifySelf: 'center',
+        alignSelf: 'center'
     }
 }));
 
-function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date }) {
+function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date, isLoading }) {
     const classes = useStyles()
     return (
         <div className={classes.root}>
@@ -53,9 +62,14 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date }) {
                     <Card
                         className={classes.card, classes.firstCard}
                     >
-                        <CardContent>
-                            <Typography className={classes.cardTitle}>Total cases - {date}</Typography>
-                            <Typography className={classes.cardData}>{totalCases}</Typography>
+                        <CardContent className={classes.cardContent}>
+                            {isLoading ?
+                                <CircularProgress className={classes.progress} /> :
+                                <>
+                                    <Typography className={classes.cardTitle}>Total cases - {date}</Typography>
+                                    <Typography className={classes.cardData}>{totalCases}</Typography>
+                                </>
+                            }
                         </CardContent>
                     </Card>
                 </Grid>
@@ -67,9 +81,14 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date }) {
                     <Card
                         className={classes.card, classes.secondCard}
                     >
-                        <CardContent>
-                            <Typography className={classes.cardTitle}>Total deaths - {date}</Typography>
-                            <Typography className={classes.cardData}>{totalDeaths}</Typography>
+                        <CardContent className={classes.cardContent}>
+                            {isLoading ?
+                                <CircularProgress className={classes.progress} /> :
+                                <>
+                                    <Typography className={classes.cardTitle}>Total deaths - {date}</Typography>
+                                    <Typography className={classes.cardData}>{totalDeaths}</Typography>
+                                </>
+                            }
                         </CardContent>
                     </Card>
                 </Grid>
@@ -81,9 +100,14 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date }) {
                     <Card
                         className={classes.card, classes.thirdCard}
                     >
-                        <CardContent>
-                            <Typography className={classes.cardTitle}>Today recovered - {date}</Typography>
-                            <Typography className={classes.cardData}>{totalRecovered}</Typography>
+                        <CardContent className={classes.cardContent}>
+                            {isLoading ?
+                                <CircularProgress className={classes.progress} /> :
+                                <>
+                                    <Typography className={classes.cardTitle}>Today recovered - {date}</Typography>
+                                    <Typography className={classes.cardData}>{totalRecovered}</Typography>
+                                </>
+                            }
                         </CardContent>
                     </Card>
                 </Grid>
@@ -95,9 +119,14 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date }) {
                     <Card
                         className={classes.card, classes.fourthCard}
                     >
-                        <CardContent>
-                            <Typography className={classes.cardTitle}>Open cases - {date}</Typography>
-                            <Typography className={classes.cardData}>{openCases}</Typography>
+                        <CardContent className={classes.cardContent}>
+                            {isLoading ?
+                                <CircularProgress className={classes.progress} /> :
+                                <>
+                                    <Typography className={classes.cardTitle}>Open cases - {date}</Typography>
+                                    <Typography className={classes.cardData}>{openCases}</Typography>
+                                </>
+                            }
                         </CardContent>
                     </Card>
                 </Grid>
