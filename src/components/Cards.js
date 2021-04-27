@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     },
     fourthCard: {
         backgroundColor: theme.palette.error.main
-    },
+    }
 }));
 
 function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date }) {

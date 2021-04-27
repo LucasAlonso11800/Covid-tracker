@@ -7,20 +7,19 @@ const useStyles = makeStyles((theme) => ({
     gridContainer: {
         flexGrow: 1,
     },
-    gridItem: {
-
-    },
     card: {
         padding: '0.5em 0.25em',
         flexGrow: 1
     },
     cardTitle: {
         fontSize: '0.75rem',
-        color: '#ffffff'
+        color: '#ffffff',
+        textAlign: 'center'
     },
     cardData: {
         fontSize: '1.25rem',
-        color: '#ffffff'
+        color: '#ffffff',
+        textAlign: 'center'
     },
     firstCard: {
         backgroundColor: theme.palette.primary.main
@@ -30,6 +29,9 @@ const useStyles = makeStyles((theme) => ({
     },
     thirdCard: {
         backgroundColor: theme.palette.warning.main
+    },
+    fourthCard: {
+        backgroundColor: theme.palette.error.main
     }
 }));
 
@@ -43,11 +45,11 @@ function Percentages() {
             spacing={2}
         >
             <Grid
-                xs={4}
-                sm={12}
+                xs={3}
+                sm={6}
             >
                 <Card
-                    className={classes.card, classes.firstCard}
+                    className={classes.firstCard}
                 >
                     <CardContent>
                         <Typography className={classes.cardTitle}>Total cases</Typography>
@@ -56,11 +58,11 @@ function Percentages() {
                 </Card>
             </Grid>
             <Grid
-                xs={4}
-                sm={12}
+                xs={3}
+                sm={6}
             >
                 <Card
-                    className={classes.card, classes.secondCard}
+                    className={classes.secondCard}
                 >
                     <CardContent>
                         <Typography className={classes.cardTitle}>Total cases</Typography>
@@ -69,11 +71,24 @@ function Percentages() {
                 </Card>
             </Grid>
             <Grid
-                xs={4}
-                sm={12}
+                xs={3}
+                sm={6}
             >
                 <Card
-                    className={classes.card, classes.thirdCard}
+                    className={classes.thirdCard}
+                >
+                    <CardContent>
+                        <Typography className={classes.cardTitle}>Total cases</Typography>
+                        <Typography className={classes.cardData}>20%</Typography>
+                    </CardContent>
+                </Card>
+            </Grid>
+            <Grid
+                xs={3}
+                sm={6}
+            >
+                <Card
+                    className={classes.fourthCard}
                 >
                     <CardContent>
                         <Typography className={classes.cardTitle}>Total cases</Typography>
