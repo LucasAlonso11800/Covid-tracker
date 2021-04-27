@@ -4,6 +4,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, CircularProgress } from '@material-ui/core';
 import { Bar, Line } from 'react-chartjs-2';
 
+import Percentages from './Percentages';
+
 const useStyles = makeStyles(() => ({
     gridContainer: {
         flexGrow: 1,
@@ -12,14 +14,13 @@ const useStyles = makeStyles(() => ({
     gridItem: {
         height: '50vh',
         padding: '0.5em',
-        boxShadow: '0 0 5px 1px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center'
     }
 }));
 
-function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartData, isLoading }) {
+function Charts({ firstChartData, secondChartData, thirdChartData, isLoading }) {
     const classes = useStyles()
 
     return (
@@ -31,7 +32,7 @@ function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartDa
             <Grid
                 className={classes.gridItem}
                 item
-                xs={10}
+                xs={12}
                 sm={6}
             >
                 {isLoading ?
@@ -49,7 +50,7 @@ function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartDa
             <Grid
                 className={classes.gridItem}
                 item
-                xs={10}
+                xs={12}
                 sm={6}
             >{isLoading ?
                 <CircularProgress /> :
@@ -65,7 +66,7 @@ function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartDa
             <Grid
                 className={classes.gridItem}
                 item
-                xs={10}
+                xs={12}
                 sm={6}
             >
                 {isLoading ?
@@ -83,18 +84,12 @@ function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartDa
             <Grid
                 className={classes.gridItem}
                 item
-                xs={10}
+                xs={12}
                 sm={6}
             >
                 {isLoading ?
                     <CircularProgress /> :
-                    <Bar
-                        className='chart'
-                        data={fourthChartData}
-                        options={{
-                            maintainAspectRatio: false
-                        }}
-                    />
+                    <Percentages />
                 }
             </Grid>
         </Grid>

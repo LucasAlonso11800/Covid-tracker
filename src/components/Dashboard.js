@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 import Charts from './Charts'
+import Cards from './Cards';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { MenuItem, FormControl, Select, TextField } from '@material-ui/core';
@@ -165,21 +166,8 @@ function Dashboard() {
                 },
             ]
         })
-        setFourthChartData({
-            labels: dates,
-            datasets: [
-                {
-                    label: 'Total deaths',
-                    data: totalDeaths,
-                    fill: true,
-                    borderColor: 'rgb(70, 230, 70)',
-                    borderWidth: 2,
-                    pointHitRadius: 10,
-                    tension: 0.2
-                }]
-        })
         setIsLoading(false)
-    }, [totalDeaths])
+    }, [openCases])
 
     const classes = useStyles();
 
@@ -208,12 +196,13 @@ function Dashboard() {
                     onChange={e => setDate(new Date(e.target.value))}
                 />
             </FormControl>
-
+            <Cards 
+                
+            />
             <Charts
                 firstChartData={firstChartData}
                 secondChartData={secondChartData}
                 thirdChartData={thirdChartData}
-                fourthChartData={fourthChartData}
                 isLoading={isLoading}
             />
         </div>
