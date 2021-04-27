@@ -1,14 +1,14 @@
 import './App.css';
 
 import Navbar from './components/Navbar';
-import GlobalDashboard from './components/GlobalDashboard';
+import Dashboard from './components/Dashboard'
 
 function App() {
     return (
-        <div className="background">
+        <>
             <Navbar />
-            <GlobalDashboard />
-        </div>
+            <Dashboard />
+        </>
     );
 }
 
