@@ -7,13 +7,12 @@ import { Bar, Line } from 'react-chartjs-2';
 const useStyles = makeStyles(() => ({
     gridContainer: {
         flexGrow: 1,
-        padding: '0.5em 0',
+        margin: '1em 0',
     },
     gridItem: {
         height: '50vh',
         padding: '0.5em',
-        border: '2px solid #000000',
-        margin: '0.5em 0'
+        boxShadow: '0 0 5px 1px'
     }
 }));
 
@@ -24,14 +23,13 @@ function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartDa
         <Grid
             container
             className={classes.gridContainer}
-            justify='space-around'
             alignItems='center'
         >
             <Grid
                 className={classes.gridItem}
                 item
                 xs={10}
-                sm={5}
+                sm={6}
             >
                 <Line
                     className='chart'
@@ -46,7 +44,7 @@ function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartDa
                 className={classes.gridItem}
                 item
                 xs={10}
-                sm={5}
+                sm={6}
             >
                 <Bar
                     className='chart'
@@ -60,7 +58,7 @@ function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartDa
                 className={classes.gridItem}
                 item
                 xs={10}
-                sm={5}
+                sm={6}
             >
                 <Line
                     className='chart'
@@ -75,7 +73,7 @@ function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartDa
                 className={classes.gridItem}
                 item
                 xs={10}
-                sm={5}
+                sm={6}
             >
                 <Bar
                     className='chart'

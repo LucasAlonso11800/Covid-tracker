@@ -4,23 +4,20 @@ import axios from 'axios';
 import Charts from './Charts'
 
 import { makeStyles } from '@material-ui/core/styles';
-import { InputLabel, MenuItem, FormControl, Select, TextField } from '@material-ui/core';
+import { MenuItem, FormControl, Select, TextField } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
-    text: {
-        flexGrow: 1,
-        textAlign: 'center',
-        marginTop: '0.5em'
+    root: {
+        padding: '2em'
     },
-    gridContainer: {
-        flexGrow: 1,
-        padding: '0.5em 0',
+    form: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: '50%',
+        justifyContent: 'space-between'
     },
-    gridItem: {
-        height: '50vh',
-        padding: '0.5em',
-        border: '2px solid #000000',
-        margin: '0.5em 0'
+    formItem: {
+        width: '45%'
     }
 }));
 
@@ -45,7 +42,7 @@ function Dashboard() {
 
     const initialURL = 'https://api.covid19tracking.narrativa.com/api';
 
-    function dateToString(date){
+    function dateToString(date) {
         return date.toISOString().substring(0, 10)
     };
 
@@ -91,12 +88,14 @@ function Dashboard() {
                 setTotalRecovered(newTotalRecovered);
                 setOpenCases(newOpenCases);
                 setTotalDeaths(newTotalDeaths);
+
+                createCharts();
             })
             .catch(err => console.log(err));
     }, [date, country]);
 
-    // FIRST CHART
-    useEffect(() => {
+    // CREATE CHARTS
+    function createCharts(){
         setFirstChartData({
             labels: dates,
             datasets: [
@@ -119,10 +118,6 @@ function Dashboard() {
                     tension: 0.2
                 }]
         })
-    }, [dates, cases, recovered])
-    
-    // SECOND CHART
-    useEffect(() => {
         setSecondChartData({
             labels: dates,
             datasets: [
@@ -136,10 +131,6 @@ function Dashboard() {
                     tension: 0.2
                 }]
         })
-    }, [dates, deaths])
-    
-    // THIRD CHART
-    useEffect(() => {
         setThirdChartData({
             labels: dates,
             datasets: [
@@ -172,10 +163,6 @@ function Dashboard() {
                 },
             ]
         })
-    }, [dates, totalCases, totalRecovered, openCases]);
-    
-    // FOURTH CHART
-    useEffect(() => {
         setFourthChartData({
             labels: dates,
             datasets: [
@@ -189,14 +176,17 @@ function Dashboard() {
                     tension: 0.2
                 }]
         })
-    }, [dates, totalDeaths])
+    };
 
     const classes = useStyles();
 
     return (
-        <div className="background">
-            <FormControl>
+        <div className={classes.root}>
+            <FormControl
+                className={classes.form}
+            >
                 <Select
+                    className={classes.formItem}
                     value={country}
                     onChange={e => setCountry(e.target.value)}
                 >
@@ -209,9 +199,8 @@ function Dashboard() {
                         </MenuItem>
                     })}
                 </Select>
-                <InputLabel htmlFor='date'>Select a date</InputLabel>
                 <TextField
-                    id='date'
+                    className={classes.formItem}
                     type='date'
                     onChange={e => setDate(new Date(e.target.value))}
                 />
