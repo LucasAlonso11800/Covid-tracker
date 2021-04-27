@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
-import { Grid } from '@material-ui/core';
+import { Grid, CircularProgress } from '@material-ui/core';
 import { Bar, Line } from 'react-chartjs-2';
 
 const useStyles = makeStyles(() => ({
@@ -12,11 +12,14 @@ const useStyles = makeStyles(() => ({
     gridItem: {
         height: '50vh',
         padding: '0.5em',
-        boxShadow: '0 0 5px 1px'
+        boxShadow: '0 0 5px 1px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 }));
 
-function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartData }) {
+function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartData, isLoading }) {
     const classes = useStyles()
 
     return (
@@ -31,21 +34,25 @@ function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartDa
                 xs={10}
                 sm={6}
             >
-                <Line
-                    className='chart'
-                    data={firstChartData}
-                    options={{
-                        maintainAspectRatio: false,
+                {isLoading ?
+                    <CircularProgress /> :
+                    <Line
+                        className='chart'
+                        data={firstChartData}
+                        options={{
+                            maintainAspectRatio: false,
 
-                    }}
-                />
+                        }}
+                    />
+                }
             </Grid>
             <Grid
                 className={classes.gridItem}
                 item
                 xs={10}
                 sm={6}
-            >
+            >{isLoading ?
+                <CircularProgress /> :
                 <Bar
                     className='chart'
                     data={secondChartData}
@@ -53,6 +60,7 @@ function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartDa
                         maintainAspectRatio: false
                     }}
                 />
+                }
             </Grid>
             <Grid
                 className={classes.gridItem}
@@ -60,14 +68,17 @@ function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartDa
                 xs={10}
                 sm={6}
             >
-                <Line
-                    className='chart'
-                    data={thirdChartData}
-                    options={{
-                        maintainAspectRatio: false,
+                {isLoading ?
+                    <CircularProgress /> :
+                    <Line
+                        className='chart'
+                        data={thirdChartData}
+                        options={{
+                            maintainAspectRatio: false,
 
-                    }}
-                />
+                        }}
+                    />
+                }
             </Grid>
             <Grid
                 className={classes.gridItem}
@@ -75,13 +86,16 @@ function Charts({ firstChartData, secondChartData, thirdChartData, fourthChartDa
                 xs={10}
                 sm={6}
             >
-                <Bar
-                    className='chart'
-                    data={fourthChartData}
-                    options={{
-                        maintainAspectRatio: false
-                    }}
-                />
+                {isLoading ?
+                    <CircularProgress /> :
+                    <Bar
+                        className='chart'
+                        data={fourthChartData}
+                        options={{
+                            maintainAspectRatio: false
+                        }}
+                    />
+                }
             </Grid>
         </Grid>
     )

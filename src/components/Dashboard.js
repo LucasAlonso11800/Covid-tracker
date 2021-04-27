@@ -40,6 +40,8 @@ function Dashboard() {
     const [thirdChartData, setThirdChartData] = useState([]);
     const [fourthChartData, setFourthChartData] = useState([]);
 
+    const [isLoading, setIsLoading] = useState()
+
     const initialURL = 'https://api.covid19tracking.narrativa.com/api';
 
     function dateToString(date) {
@@ -55,6 +57,8 @@ function Dashboard() {
 
     // GET DATA
     useEffect(() => {
+        setIsLoading(true)
+
         const secondDate = new Date(date.valueOf());
         secondDate.setMonth(date.getMonth() - 1);
 
@@ -88,14 +92,12 @@ function Dashboard() {
                 setTotalRecovered(newTotalRecovered);
                 setOpenCases(newOpenCases);
                 setTotalDeaths(newTotalDeaths);
-
-                createCharts();
             })
             .catch(err => console.log(err));
     }, [date, country]);
 
     // CREATE CHARTS
-    function createCharts(){
+    useEffect(() => {
         setFirstChartData({
             labels: dates,
             datasets: [
@@ -176,7 +178,8 @@ function Dashboard() {
                     tension: 0.2
                 }]
         })
-    };
+        setIsLoading(false)
+    }, [totalDeaths])
 
     const classes = useStyles();
 
@@ -211,6 +214,7 @@ function Dashboard() {
                 secondChartData={secondChartData}
                 thirdChartData={thirdChartData}
                 fourthChartData={fourthChartData}
+                isLoading={isLoading}
             />
         </div>
     )
