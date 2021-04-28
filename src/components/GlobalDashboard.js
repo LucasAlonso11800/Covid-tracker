@@ -25,6 +25,8 @@ function GlobalDashboard() {
     const [increaseOpenCases, setIncreaseOpenCases] = useState('');
     const [increaseRecovered, setIncreaseRecovered] = useState('');
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const initialURL = 'https://api.covid19tracking.narrativa.com/api';
 
     function dateToString(date) {
@@ -37,7 +39,12 @@ function GlobalDashboard() {
 
         axios.get(`${initialURL}?date_from=${dateToString(secondDate)}&date_to=${dateToString(date)}`)
             .then(res => {
-                console.log(res.data)
+                setDates(Object.keys(res.data.dates));
+
+                setTotalCases(res.data.total.today_confirmed);
+                setTotalDeaths(res.data.total.today_deaths);
+                setTotalRecovered(res.data.total.today_recovered);
+                setOpenCases(res.data.total.today_open_cases);
             })
             .catch(err => console.log(err))
 
@@ -45,8 +52,15 @@ function GlobalDashboard() {
 
     return (
         <>
+            <Cards 
+                totalCases={totalCases}
+                totalDeaths={totalDeaths}
+                totalRecovered={totalRecovered}
+                openCases={openCases}
+                date={dates[dates.length - 1]}
+                isLoading={isLoading}
+            />
             {/* <Form />
-            <Cards />
             <Charts /> */}
         </>
     )

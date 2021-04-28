@@ -27,7 +27,7 @@ function LocalDashboard() {
     const [increaseOpenCases, setIncreaseOpenCases] = useState('');
     const [increaseRecovered, setIncreaseRecovered] = useState('');
 
-    const [isLoading, setIsLoading] = useState(true)
+    const [isLoading, setIsLoading] = useState(true);
 
     const initialURL = 'https://api.covid19tracking.narrativa.com/api';
 
