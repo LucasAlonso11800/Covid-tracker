@@ -39,12 +39,18 @@ function GlobalDashboard() {
 
         axios.get(`${initialURL}?date_from=${dateToString(secondDate)}&date_to=${dateToString(date)}`)
             .then(res => {
+                console.log(res.data)
                 setDates(Object.keys(res.data.dates));
 
                 setTotalCases(res.data.total.today_confirmed);
                 setTotalDeaths(res.data.total.today_deaths);
                 setTotalRecovered(res.data.total.today_recovered);
                 setOpenCases(res.data.total.today_open_cases);
+
+                setIncreaseCases(res.data.total.today_vs_yesterday_confirmed);
+                setIncreaseDeaths(res.data.total.today_vs_yesterday_deaths);
+                setIncreaseRecovered(res.data.total.today_vs_yesterday_recovered);
+                setIncreaseOpenCases(res.data.total.today_vs_yesterday_open_cases);
             })
             .catch(err => console.log(err))
 
@@ -52,7 +58,7 @@ function GlobalDashboard() {
 
     return (
         <>
-            <Cards 
+            <Cards
                 totalCases={totalCases}
                 totalDeaths={totalDeaths}
                 totalRecovered={totalRecovered}
@@ -60,8 +66,17 @@ function GlobalDashboard() {
                 date={dates[dates.length - 1]}
                 isLoading={isLoading}
             />
-            {/* <Form />
-            <Charts /> */}
+            <Charts
+                firstChartData={firstChartData}
+                secondChartData={secondChartData}
+                thirdChartData={thirdChartData}
+                increaseCases={increaseCases}
+                increaseDeaths={increaseDeaths}
+                increaseRecovered={increaseRecovered}
+                increaseOpenCases={increaseOpenCases}
+                isLoading={isLoading}
+            />
+            {/* <Form />*/}
         </>
     )
 };

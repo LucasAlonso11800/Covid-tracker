@@ -46,7 +46,7 @@ function Percentages({ increaseCases, increaseDeaths, increaseOpenCases, increas
             <Grid item xs={3} sm={6}>
                 <Card className={classes.firstCard}>
                     <CardContent className={classes.cardContent}>
-                        <Typography className={classes.cardTitle}>Total cases increase</Typography>
+                        <Typography className={classes.cardTitle}>Cases increase since yesterday</Typography>
                         <Typography className={classes.cardData}>{(Number(increaseCases) * 100).toFixed(2)}%</Typography>
                     </CardContent>
                 </Card>
@@ -55,7 +55,7 @@ function Percentages({ increaseCases, increaseDeaths, increaseOpenCases, increas
 
                 <Card className={classes.secondCard}>
                     <CardContent className={classes.cardContent}>
-                        <Typography className={classes.cardTitle}>Total deaths increase</Typography>
+                        <Typography className={classes.cardTitle}>Deaths increase since yesterday</Typography>
                         <Typography className={classes.cardData}>{(Number(increaseDeaths) * 100).toFixed(2)}%</Typography>
                     </CardContent>
                 </Card>
@@ -63,7 +63,7 @@ function Percentages({ increaseCases, increaseDeaths, increaseOpenCases, increas
             <Grid item xs={3} sm={6}>
                 <Card className={classes.thirdCard}>
                     <CardContent className={classes.cardContent}>
-                        <Typography className={classes.cardTitle}>Total open cases increase</Typography>
+                        <Typography className={classes.cardTitle}>Open cases increase since yesterday</Typography>
                         <Typography className={classes.cardData}>{(Number(increaseOpenCases) * 100).toFixed(2)}%</Typography>
                     </CardContent>
                 </Card>
@@ -71,7 +71,7 @@ function Percentages({ increaseCases, increaseDeaths, increaseOpenCases, increas
             <Grid item xs={3} sm={6}>
                 <Card className={classes.fourthCard}>
                     <CardContent className={classes.cardContent}>
-                        <Typography className={classes.cardTitle}>Total recovered increase</Typography>
+                        <Typography className={classes.cardTitle}>Recovered peolple increase since yesterday</Typography>
                         <Typography className={classes.cardData}>{(Number(increaseRecovered) * 100).toFixed(2)}%</Typography>
                     </CardContent>
                 </Card>
