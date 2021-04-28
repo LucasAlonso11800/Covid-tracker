@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import Form from './Form';
-import Cards from './Cards';
-import Charts from './Charts'
+import Form from '../components/Form';
+import Cards from '../components/Cards';
+import Charts from '../components/Charts';
 
 function LocalDashboard() {
     const currentDate = new Date();
