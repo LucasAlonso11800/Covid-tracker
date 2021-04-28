@@ -49,7 +49,7 @@ function LocalDashboard() {
         const from = new Date(date.valueOf());
         from.setDate(date.getDate() - 1);
         from.setMonth(date.getMonth() - 1);
-        
+
         const to = new Date(date.valueOf());
         to.setDate(date.getDate() - 1);
 
@@ -88,6 +88,8 @@ function LocalDashboard() {
                 setIncreaseDeaths(data[data.length - 1].countries[country].today_vs_yesterday_deaths);
                 setIncreaseOpenCases(data[data.length - 1].countries[country].today_vs_yesterday_open_cases);
                 setIncreaseRecovered(data[data.length - 1].countries[country].today_vs_yesterday_recovered);
+                
+                setIsLoading(false);
             })
             .catch(err => console.log(err));
     }, [date, country]);
@@ -170,7 +172,6 @@ function LocalDashboard() {
                 }
             ]
         })
-        setIsLoading(false)
     }, [totalDeaths])
 
     return (
