@@ -8,9 +8,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import { MenuItem, FormControl, Select, TextField } from '@material-ui/core';
 
 const useStyles = makeStyles(() => ({
-    root: {
-        padding: '2em'
-    },
     form: {
         display: 'flex',
         flexDirection: 'row',
@@ -22,7 +19,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-function Dashboard() {
+function LocalDashboard() {
     const currentDate = new Date();
 
     const [date, setDate] = useState(currentDate);
@@ -189,10 +186,8 @@ function Dashboard() {
     const classes = useStyles();
 
     return (
-        <div className={classes.root}>
-            <FormControl
-                className={classes.form}
-            >
+        <>
+            <FormControl className={classes.form}>
                 <Select
                     className={classes.formItem}
                     value={country}
@@ -232,8 +227,8 @@ function Dashboard() {
                 increaseRecovered={increaseRecovered}
                 isLoading={isLoading}
             />
-        </div>
+        </>
     )
 };
 
-export default Dashboard;
+export default LocalDashboard;

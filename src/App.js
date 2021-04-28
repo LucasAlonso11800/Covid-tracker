@@ -1,13 +1,29 @@
 import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+import { makeStyles } from '@material-ui/core/styles';
 
 import Navbar from './components/Navbar';
-import Dashboard from './components/Dashboard'
+import LocalDashboard from './components/LocalDashboard'
+import GlobalDashboard from './components/GlobalDashboard';
+
+const useStyles = makeStyles(() => ({
+    root: {
+        padding: '2em'
+    },
+}));
 
 function App() {
+    const classes = useStyles()
     return (
         <>
             <Navbar />
-            <Dashboard />
+            <Router>
+                <div className={classes.root}>
+                    <Route path='/' exact component={GlobalDashboard}/>
+                    <Route path='/local' component={LocalDashboard}/>
+                </div>
+            </Router>
         </>
     );
 }
