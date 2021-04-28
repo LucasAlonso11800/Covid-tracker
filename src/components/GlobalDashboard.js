@@ -58,6 +58,11 @@ function GlobalDashboard() {
 
     return (
         <>
+            <Form
+                date={dateToString(date)}
+                setDate={setDate}
+                local={false}
+            />            
             <Cards
                 totalCases={totalCases}
                 totalDeaths={totalDeaths}
@@ -76,7 +81,6 @@ function GlobalDashboard() {
                 increaseOpenCases={increaseOpenCases}
                 isLoading={isLoading}
             />
-            {/* <Form />*/}
         </>
     )
 };

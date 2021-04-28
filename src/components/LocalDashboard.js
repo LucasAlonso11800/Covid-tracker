@@ -175,9 +175,9 @@ function LocalDashboard() {
                 country={country}
                 setCountry={setCountry}
                 countries={countries}
-                date={date}
+                date={dateToString(date)}
                 setDate={setDate}
-                dateToString={dateToString}
+                local={true}
             />
             <Cards 
                 totalCases={totalCases[totalCases.length - 1]}
