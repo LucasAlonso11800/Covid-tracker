@@ -1,23 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import Charts from './Charts'
+import Form from './Form';
 import Cards from './Cards';
-
-import { makeStyles } from '@material-ui/core/styles';
-import { MenuItem, FormControl, Select, TextField } from '@material-ui/core';
-
-const useStyles = makeStyles(() => ({
-    form: {
-        display: 'flex',
-        flexDirection: 'row',
-        width: '50%',
-        justifyContent: 'space-between'
-    },
-    formItem: {
-        width: '45%'
-    }
-}));
+import Charts from './Charts'
 
 function LocalDashboard() {
     const currentDate = new Date();
@@ -183,32 +169,16 @@ function LocalDashboard() {
         setIsLoading(false)
     }, [totalDeaths])
 
-    const classes = useStyles();
-
     return (
         <>
-            <FormControl className={classes.form}>
-                <Select
-                    className={classes.formItem}
-                    value={country}
-                    onChange={e => setCountry(e.target.value)}
-                >
-                    {countries.map(c => {
-                        return <MenuItem
-                            key={c}
-                            value={c}
-                        >
-                            {c}
-                        </MenuItem>
-                    })}
-                </Select>
-                <TextField
-                    className={classes.formItem}
-                    type='date'
-                    value={dateToString(date)}
-                    onChange={e => setDate(new Date(e.target.value))}
-                />
-            </FormControl>
+            <Form 
+                country={country}
+                setCountry={setCountry}
+                countries={countries}
+                date={date}
+                setDate={setDate}
+                dateToString={dateToString}
+            />
             <Cards 
                 totalCases={totalCases[totalCases.length - 1]}
                 totalDeaths={totalDeaths[totalDeaths.length - 1]}
