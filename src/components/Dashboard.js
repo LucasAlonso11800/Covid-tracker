@@ -96,6 +96,7 @@ function Dashboard() {
                 setTotalRecovered(newTotalRecovered);
                 setOpenCases(newOpenCases);
                 setTotalDeaths(newTotalDeaths);
+
                 setIncreaseCases(data[data.length - 1].countries[country].today_vs_yesterday_confirmed);
                 setIncreaseDeaths(data[data.length - 1].countries[country].today_vs_yesterday_deaths);
                 setIncreaseOpenCases(data[data.length - 1].countries[country].today_vs_yesterday_open_cases);
@@ -209,6 +210,7 @@ function Dashboard() {
                 <TextField
                     className={classes.formItem}
                     type='date'
+                    value={dateToString(date)}
                     onChange={e => setDate(new Date(e.target.value))}
                 />
             </FormControl>
