@@ -46,10 +46,14 @@ function LocalDashboard() {
     useEffect(() => {
         setIsLoading(true)
 
-        const secondDate = new Date(date.valueOf());
-        secondDate.setMonth(date.getMonth() - 1);
+        const from = new Date(date.valueOf());
+        from.setDate(date.getDate() - 1);
+        from.setMonth(date.getMonth() - 1);
+        
+        const to = new Date(date.valueOf());
+        to.setDate(date.getDate() - 1);
 
-        axios.get(`${initialURL}/country/${country.toLowerCase()}?date_from=${dateToString(secondDate)}&date_to=${dateToString(date)}`)
+        axios.get(`${initialURL}/country/${country.toLowerCase()}?date_from=${dateToString(from)}&date_to=${dateToString(to)}`)
             .then(res => {
                 setDates(Object.keys(res.data.dates));
                 const data = Object.values(res.data.dates);
