@@ -17,11 +17,11 @@ function App() {
     const classes = useStyles()
     return (
         <>
-            <Navbar />
             <Router>
+                <Navbar />
                 <div className={classes.root}>
-                    <Route path='/' exact component={GlobalDashboard}/>
-                    <Route path='/local' component={LocalDashboard}/>
+                    <Route path='/' exact component={GlobalDashboard} />
+                    <Route path='/local' component={LocalDashboard} />
                 </div>
             </Router>
         </>
