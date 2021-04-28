@@ -50,7 +50,7 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date, isLoa
                             <CircularProgress className={classes.progress} /> :
                             <>
                                 <Typography className={classes.cardTitle}>{date} - Total Covid-19 cases</Typography>
-                                <Typography className={classes.cardData}>{totalCases.toLocaleString('en-US')}</Typography>
+                                <Typography className={classes.cardData}>{totalCases ? totalCases.toLocaleString('en-US') : ''}</Typography>
                             </>
                         }
                     </CardContent>
@@ -63,7 +63,7 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date, isLoa
                             <CircularProgress className={classes.progress} /> :
                             <>
                                 <Typography className={classes.cardTitle}>{date} - Deaths due Covid</Typography>
-                                <Typography className={classes.cardData}>{totalDeaths.toLocaleString('en-US')}</Typography>
+                                <Typography className={classes.cardData}>{totalDeaths ? totalDeaths.toLocaleString('en-US') : ''}</Typography>
                             </>
                         }
                     </CardContent>
@@ -76,7 +76,7 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date, isLoa
                             <CircularProgress className={classes.progress} /> :
                             <>
                                 <Typography className={classes.cardTitle}>{date} - Recovered people</Typography>
-                                <Typography className={classes.cardData}>{totalRecovered.toLocaleString('en-US')}</Typography>
+                                <Typography className={classes.cardData}>{totalRecovered ? totalRecovered.toLocaleString('en-US') : ''}</Typography>
                             </>
                         }
                     </CardContent>
@@ -89,7 +89,7 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date, isLoa
                             <CircularProgress className={classes.progress} /> :
                             <>
                                 <Typography className={classes.cardTitle}>{date} - People currently with Covid</Typography>
-                                <Typography className={classes.cardData}>{openCases.toLocaleString('en-US')}</Typography>
+                                <Typography className={classes.cardData}>{openCases ? openCases.toLocaleString('en-US') : ''}</Typography>
                             </>
                         }
                     </CardContent>
