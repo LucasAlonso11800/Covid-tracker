@@ -25,7 +25,7 @@ function GlobalDashboard() {
     const [increaseOpenCases, setIncreaseOpenCases] = useState('');
     const [increaseRecovered, setIncreaseRecovered] = useState('');
 
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     const initialURL = 'https://api.covid19tracking.narrativa.com/api';
 
@@ -34,6 +34,8 @@ function GlobalDashboard() {
     };
 
     useEffect(() => {
+        setIsLoading(true);
+
         const secondDate = new Date(date.valueOf());
         secondDate.setDate(date.getDate() - 20);
 
@@ -51,6 +53,8 @@ function GlobalDashboard() {
                 setIncreaseDeaths(res.data.total.today_vs_yesterday_deaths);
                 setIncreaseRecovered(res.data.total.today_vs_yesterday_recovered);
                 setIncreaseOpenCases(res.data.total.today_vs_yesterday_open_cases);
+
+                setIsLoading(false);
             })
             .catch(err => console.log(err))
 

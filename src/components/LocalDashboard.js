@@ -44,7 +44,7 @@ function LocalDashboard() {
 
     // GET DATA
     useEffect(() => {
-        setIsLoading(true)
+        setIsLoading(true);
 
         const from = new Date(date.valueOf());
         from.setDate(date.getDate() - 1);
