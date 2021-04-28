@@ -2,7 +2,7 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, CircularProgress } from '@material-ui/core';
-import { Bar, Line } from 'react-chartjs-2';
+import { Bar, Line, } from 'react-chartjs-2';
 
 import Percentages from './Percentages';
 
@@ -42,7 +42,17 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                         data={firstChartData}
                         options={{
                             maintainAspectRatio: false,
-
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Last month daily info',
+                                    position: 'top',
+                                    align: 'start',
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            }
                         }}
                     />
                 }
@@ -58,7 +68,18 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                     className='chart'
                     data={secondChartData}
                     options={{
-                        maintainAspectRatio: false
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'Last month daily deaths',
+                                position: 'top',
+                                align: 'start',
+                                font: {
+                                    size: 14
+                                }
+                            }
+                        }
                     }}
                 />
                 }
@@ -76,7 +97,17 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                         data={thirdChartData}
                         options={{
                             maintainAspectRatio: false,
-
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: 'Evolution of total numbers',
+                                    position: 'top',
+                                    align: 'start',
+                                    font: {
+                                        size: 14
+                                    }
+                                }
+                            }
                         }}
                     />
                 }
