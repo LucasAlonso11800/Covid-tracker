@@ -4,15 +4,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography, CircularProgress } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: '1',
-        margin: '1em 0'
-    },
     gridContainer: {
+        margin: '1em 0',
         flexGrow: '1'
-    },
-    card: {
-        padding: '0.5em 0.25em',
     },
     cardContent: {
         display: 'flex',
@@ -48,90 +42,60 @@ const useStyles = makeStyles((theme) => ({
 function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date, isLoading }) {
     const classes = useStyles()
     return (
-        <div className={classes.root}>
-            <Grid
-                container
-                className={classes.gridContainer}
-                spacing={2}
-            >
-                <Grid
-                    item
-                    xs={6}
-                    md={3}
-                >
-                    <Card
-                        className={classes.card, classes.firstCard}
-                    >
-                        <CardContent className={classes.cardContent}>
-                            {isLoading ?
-                                <CircularProgress className={classes.progress} /> :
-                                <>
-                                    <Typography className={classes.cardTitle}>Total cases - {date}</Typography>
-                                    <Typography className={classes.cardData}>{totalCases}</Typography>
-                                </>
-                            }
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid
-                    item
-                    xs={6}
-                    md={3}
-                >
-                    <Card
-                        className={classes.card, classes.secondCard}
-                    >
-                        <CardContent className={classes.cardContent}>
-                            {isLoading ?
-                                <CircularProgress className={classes.progress} /> :
-                                <>
-                                    <Typography className={classes.cardTitle}>Total deaths - {date}</Typography>
-                                    <Typography className={classes.cardData}>{totalDeaths}</Typography>
-                                </>
-                            }
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid
-                    item
-                    xs={6}
-                    md={3}
-                >
-                    <Card
-                        className={classes.card, classes.thirdCard}
-                    >
-                        <CardContent className={classes.cardContent}>
-                            {isLoading ?
-                                <CircularProgress className={classes.progress} /> :
-                                <>
-                                    <Typography className={classes.cardTitle}>Today recovered - {date}</Typography>
-                                    <Typography className={classes.cardData}>{totalRecovered}</Typography>
-                                </>
-                            }
-                        </CardContent>
-                    </Card>
-                </Grid>
-                <Grid
-                    item
-                    xs={6}
-                    md={3}
-                >
-                    <Card
-                        className={classes.card, classes.fourthCard}
-                    >
-                        <CardContent className={classes.cardContent}>
-                            {isLoading ?
-                                <CircularProgress className={classes.progress} /> :
-                                <>
-                                    <Typography className={classes.cardTitle}>Open cases - {date}</Typography>
-                                    <Typography className={classes.cardData}>{openCases}</Typography>
-                                </>
-                            }
-                        </CardContent>
-                    </Card>
-                </Grid>
+        <Grid container className={classes.gridContainer} spacing={2}>
+            <Grid item xs={6} md={3}>
+                <Card className={classes.firstCard}>
+                    <CardContent className={classes.cardContent}>
+                        {isLoading ?
+                            <CircularProgress className={classes.progress} /> :
+                            <>
+                                <Typography className={classes.cardTitle}>{date} - Total Covid-19 cases</Typography>
+                                <Typography className={classes.cardData}>{totalCases}</Typography>
+                            </>
+                        }
+                    </CardContent>
+                </Card>
             </Grid>
-        </div>
+            <Grid item xs={6} md={3}>
+                <Card className={classes.secondCard}>
+                    <CardContent className={classes.cardContent}>
+                        {isLoading ?
+                            <CircularProgress className={classes.progress} /> :
+                            <>
+                                <Typography className={classes.cardTitle}>{date} - Deaths due Covid</Typography>
+                                <Typography className={classes.cardData}>{totalDeaths}</Typography>
+                            </>
+                        }
+                    </CardContent>
+                </Card>
+            </Grid>
+            <Grid item xs={6} md={3}>
+                <Card className={classes.thirdCard}>
+                    <CardContent className={classes.cardContent}>
+                        {isLoading ?
+                            <CircularProgress className={classes.progress} /> :
+                            <>
+                                <Typography className={classes.cardTitle}>{date} - Recovered people</Typography>
+                                <Typography className={classes.cardData}>{totalRecovered}</Typography>
+                            </>
+                        }
+                    </CardContent>
+                </Card>
+            </Grid>
+            <Grid item xs={6} md={3}>
+                <Card className={classes.fourthCard}>
+                    <CardContent className={classes.cardContent}>
+                        {isLoading ?
+                            <CircularProgress className={classes.progress} /> :
+                            <>
+                                <Typography className={classes.cardTitle}>{date} - People currently with Covid</Typography>
+                                <Typography className={classes.cardData}>{openCases}</Typography>
+                            </>
+                        }
+                    </CardContent>
+                </Card>
+            </Grid>
+        </Grid>
     )
 }
 

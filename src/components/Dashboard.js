@@ -39,8 +39,12 @@ function Dashboard() {
     const [firstChartData, setFirstChartData] = useState([]);
     const [secondChartData, setSecondChartData] = useState([]);
     const [thirdChartData, setThirdChartData] = useState([]);
+    const [increaseCases, setIncreaseCases] = useState('');
+    const [increaseDeaths, setIncreaseDeaths] = useState('');
+    const [increaseOpenCases, setIncreaseOpenCases] = useState('');
+    const [increaseRecovered, setIncreaseRecovered] = useState('');
 
-    const [isLoading, setIsLoading] = useState()
+    const [isLoading, setIsLoading] = useState(true)
 
     const initialURL = 'https://api.covid19tracking.narrativa.com/api';
 
@@ -74,7 +78,7 @@ function Dashboard() {
                 const newTotalRecovered = [];
                 const newOpenCases = [];
                 const newTotalDeaths = [];
-
+                
                 data.forEach(d => {
                     newCases.push(d.countries[country].today_new_confirmed);
                     newRecovered.push(d.countries[country].today_new_recovered);
@@ -92,6 +96,10 @@ function Dashboard() {
                 setTotalRecovered(newTotalRecovered);
                 setOpenCases(newOpenCases);
                 setTotalDeaths(newTotalDeaths);
+                setIncreaseCases(data[data.length - 1].countries[country].today_vs_yesterday_confirmed);
+                setIncreaseDeaths(data[data.length - 1].countries[country].today_vs_yesterday_deaths);
+                setIncreaseOpenCases(data[data.length - 1].countries[country].today_vs_yesterday_open_cases);
+                setIncreaseRecovered(data[data.length - 1].countries[country].today_vs_yesterday_recovered);
             })
             .catch(err => console.log(err));
     }, [date, country]);
@@ -175,7 +183,7 @@ function Dashboard() {
             ]
         })
         setIsLoading(false)
-    }, [openCases])
+    }, [totalDeaths])
 
     const classes = useStyles();
 
@@ -216,6 +224,10 @@ function Dashboard() {
                 firstChartData={firstChartData}
                 secondChartData={secondChartData}
                 thirdChartData={thirdChartData}
+                increaseCases={increaseCases}
+                increaseDeaths={increaseDeaths}
+                increaseOpenCases={increaseOpenCases}
+                increaseRecovered={increaseRecovered}
                 isLoading={isLoading}
             />
         </div>

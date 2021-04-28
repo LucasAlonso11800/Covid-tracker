@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-function Charts({ firstChartData, secondChartData, thirdChartData, isLoading }) {
+function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases, increaseDeaths, increaseOpenCases, increaseRecovered, isLoading }) {
     const classes = useStyles()
 
     return (
@@ -89,7 +89,13 @@ function Charts({ firstChartData, secondChartData, thirdChartData, isLoading }) 
             >
                 {isLoading ?
                     <CircularProgress /> :
-                    <Percentages />
+                    <Percentages
+                        increaseCases={increaseCases}
+                        increaseDeaths={increaseDeaths}
+                        increaseOpenCases={increaseOpenCases}
+                        increaseRecovered={increaseRecovered}
+                        isLoading={isLoading}
+                    />
                 }
             </Grid>
         </Grid>
