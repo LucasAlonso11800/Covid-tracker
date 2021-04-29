@@ -5,8 +5,10 @@ import { Grid, Card, CardContent, Typography, CircularProgress } from '@material
 
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
+        flexGrow: '1',
         margin: '1em 0',
-        flexGrow: '1'
+        paddingRight: '1.5em',
+        paddingLeft: '0.5em'
     },
     cardContent: {
         display: 'flex',
@@ -14,23 +16,27 @@ const useStyles = makeStyles((theme) => ({
     },
     cardTitle: {
         fontSize: '0.75rem',
-        color: '#ffffff'
+        color: '#ffffff',
     },
     cardData: {
         fontSize: '1.25rem',
         color: '#ffffff'
     },
     firstCard: {
-        backgroundColor: theme.palette.primary.main
+        backgroundColor: theme.palette.primary.dark,
+        boxShadow: '0 0 5px 0 #000000'
     },
     secondCard: {
-        backgroundColor: theme.palette.secondary.main
+        backgroundColor: theme.palette.error.dark,
+        boxShadow: '0 0 5px 0 #000000'
     },
     thirdCard: {
-        backgroundColor: theme.palette.warning.main
+        backgroundColor: theme.palette.success.dark,
+        boxShadow: '0 0 5px 0 #000000'
     },
     fourthCard: {
-        backgroundColor: theme.palette.error.main
+        backgroundColor: theme.palette.warning.dark,
+        boxShadow: '0 0 5px 0 #000000'
     },
     progress: {
         color: '#ffffff',
@@ -39,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date, isLoading }) {
+function Cards({ totalCases, totalDeaths, totalRecovered, openCases, isLoading }) {
     const classes = useStyles()
     return (
         <Grid container className={classes.gridContainer} spacing={2}>
@@ -49,7 +55,7 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date, isLoa
                         {isLoading ?
                             <CircularProgress className={classes.progress} /> :
                             <>
-                                <Typography className={classes.cardTitle}>{date} - Total Covid-19 cases</Typography>
+                                <Typography className={classes.cardTitle}>Total Covid-19 cases</Typography>
                                 <Typography className={classes.cardData}>{totalCases ? totalCases.toLocaleString('en-US') : ''}</Typography>
                             </>
                         }
@@ -62,7 +68,7 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date, isLoa
                         {isLoading ?
                             <CircularProgress className={classes.progress} /> :
                             <>
-                                <Typography className={classes.cardTitle}>{date} - Deaths due Covid</Typography>
+                                <Typography className={classes.cardTitle}>Deaths due Covid</Typography>
                                 <Typography className={classes.cardData}>{totalDeaths ? totalDeaths.toLocaleString('en-US') : ''}</Typography>
                             </>
                         }
@@ -75,7 +81,7 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date, isLoa
                         {isLoading ?
                             <CircularProgress className={classes.progress} /> :
                             <>
-                                <Typography className={classes.cardTitle}>{date} - Recovered people</Typography>
+                                <Typography className={classes.cardTitle}>Recovered people</Typography>
                                 <Typography className={classes.cardData}>{totalRecovered ? totalRecovered.toLocaleString('en-US') : ''}</Typography>
                             </>
                         }
@@ -88,7 +94,7 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, date, isLoa
                         {isLoading ?
                             <CircularProgress className={classes.progress} /> :
                             <>
-                                <Typography className={classes.cardTitle}>{date} - People currently with Covid</Typography>
+                                <Typography className={classes.cardTitle}>People currently with Covid</Typography>
                                 <Typography className={classes.cardData}>{openCases ? openCases.toLocaleString('en-US') : ''}</Typography>
                             </>
                         }

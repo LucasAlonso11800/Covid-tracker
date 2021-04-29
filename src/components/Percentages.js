@@ -22,17 +22,21 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column'
     },
     firstCard: {
-        backgroundColor: theme.palette.primary.main
+        backgroundColor: theme.palette.primary.dark,
+        boxShadow: '0 0 5px 0 #000000'
     },
     secondCard: {
-        backgroundColor: theme.palette.secondary.main
+        backgroundColor: theme.palette.error.dark,
+        boxShadow: '0 0 5px 0 #000000'
     },
     thirdCard: {
-        backgroundColor: theme.palette.warning.main
+        backgroundColor: theme.palette.success.dark,
+        boxShadow: '0 0 5px 0 #000000'
     },
     fourthCard: {
-        backgroundColor: theme.palette.error.main
-    },
+        backgroundColor: theme.palette.warning.dark,
+        boxShadow: '0 0 5px 0 #000000'
+    }
 }));
 
 function Percentages({ increaseCases, increaseDeaths, increaseOpenCases, increaseRecovered }) {
@@ -71,7 +75,7 @@ function Percentages({ increaseCases, increaseDeaths, increaseOpenCases, increas
             <Grid item xs={3} sm={6}>
                 <Card className={classes.fourthCard}>
                     <CardContent className={classes.cardContent}>
-                        <Typography className={classes.cardTitle}>Recovered peolple increase since yesterday</Typography>
+                        <Typography className={classes.cardTitle}>Recovered people increase since yesterday</Typography>
                         <Typography className={classes.cardData}>{(Number(increaseRecovered) * 100).toFixed(2)}%</Typography>
                     </CardContent>
                 </Card>

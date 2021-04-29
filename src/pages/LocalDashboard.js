@@ -103,7 +103,7 @@ function LocalDashboard() {
                     label: 'Daily cases',
                     data: cases,
                     fill: true,
-                    borderColor: 'rgb(70, 80, 250)',
+                    borderColor: '#4791db',
                     borderWidth: 2,
                     pointHitRadius: 10,
                     tension: 0.2
@@ -112,7 +112,7 @@ function LocalDashboard() {
                     label: 'Daily recovered',
                     data: recovered,
                     fill: true,
-                    borderColor: 'rgb(70, 230, 70)',
+                    borderColor: '#81c784',
                     borderWidth: 2,
                     pointHitRadius: 10,
                     tension: 0.2
@@ -125,7 +125,7 @@ function LocalDashboard() {
                     label: 'Daily deaths',
                     data: deaths,
                     fill: true,
-                    borderColor: 'rgb(70, 230, 70)',
+                    borderColor: '#e57373',
                     borderWidth: 2,
                     pointHitRadius: 10,
                     tension: 0.2
@@ -138,7 +138,7 @@ function LocalDashboard() {
                     label: 'Total cases',
                     data: totalCases,
                     fill: true,
-                    borderColor: 'rgb(70, 30, 270)',
+                    borderColor: '#4791db',
                     borderWidth: 2,
                     pointHitRadius: 10,
                     tension: 0.2
@@ -147,7 +147,7 @@ function LocalDashboard() {
                     label: 'Total recovered',
                     data: totalRecovered,
                     fill: true,
-                    borderColor: 'rgb(70, 230, 70)',
+                    borderColor: '#81c784',
                     borderWidth: 2,
                     pointHitRadius: 10,
                     tension: 0.2
@@ -156,7 +156,7 @@ function LocalDashboard() {
                     label: 'Open cases',
                     data: openCases,
                     fill: true,
-                    borderColor: 'rgb(270, 20, 70)',
+                    borderColor: '#ffb74d',
                     borderWidth: 2,
                     pointHitRadius: 10,
                     tension: 0.2
@@ -165,7 +165,7 @@ function LocalDashboard() {
                     label: 'Total deaths',
                     data: totalDeaths,
                     fill: true,
-                    borderColor: 'rgb(0, 0, 0)',
+                    borderColor: '#e57373',
                     borderWidth: 2,
                     pointHitRadius: 10,
                     tension: 0.2

@@ -9,14 +9,22 @@ import Percentages from './Percentages';
 const useStyles = makeStyles(() => ({
     gridContainer: {
         flexGrow: 1,
-        margin: '1em 0',
+        padding: '0 0.5em'
     },
     gridItem: {
         height: '50vh',
-        padding: '0.5em',
         display: 'flex',
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+    },
+    progress: {
+        color: '#000000'
+    },
+    chart: {
+        backgroundColor: '#ffffff',
+        margin: '0.5em',
+        padding: '0.5em',
+        borderRadius: '1em'
     }
 }));
 
@@ -24,21 +32,12 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
     const classes = useStyles()
 
     return (
-        <Grid
-            container
-            className={classes.gridContainer}
-            alignItems='center'
-        >
-            <Grid
-                className={classes.gridItem}
-                item
-                xs={12}
-                sm={6}
-            >
+        <Grid container className={classes.gridContainer}>
+            <Grid item className={classes.gridItem} xs={12} sm={6}>
                 {isLoading ?
-                    <CircularProgress /> :
+                    <CircularProgress className={classes.progress} /> :
                     <Line
-                        className='chart'
+                        className={classes.chart}
                         data={firstChartData}
                         options={{
                             maintainAspectRatio: false,
@@ -48,8 +47,9 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                                     text: 'Last month daily info',
                                     position: 'top',
                                     align: 'start',
+                                    color: '#000000',
                                     font: {
-                                        size: 14
+                                        size: 16,
                                     }
                                 }
                             }
@@ -57,15 +57,11 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                     />
                 }
             </Grid>
-            <Grid
-                className={classes.gridItem}
-                item
-                xs={12}
-                sm={6}
-            >{isLoading ?
-                <CircularProgress /> :
+            <Grid item className={classes.gridItem} xs={12} sm={6}>
+                {isLoading ?
+                <CircularProgress className={classes.progress} /> :
                 <Bar
-                    className='chart'
+                    className={classes.chart}
                     data={secondChartData}
                     options={{
                         maintainAspectRatio: false,
@@ -75,25 +71,21 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                                 text: 'Last month daily deaths',
                                 position: 'top',
                                 align: 'start',
+                                color: '#000000',
                                 font: {
-                                    size: 14
-                                }
+                                    size: 16
+                                },
                             }
                         }
                     }}
                 />
                 }
             </Grid>
-            <Grid
-                className={classes.gridItem}
-                item
-                xs={12}
-                sm={6}
-            >
+            <Grid item className={classes.gridItem} xs={12} sm={6}>
                 {isLoading ?
-                    <CircularProgress /> :
+                    <CircularProgress className={classes.progress} /> :
                     <Line
-                        className='chart'
+                        className={classes.chart}
                         data={thirdChartData}
                         options={{
                             maintainAspectRatio: false,
@@ -103,8 +95,9 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                                     text: 'Evolution of total numbers',
                                     position: 'top',
                                     align: 'start',
+                                    color: '#000000',
                                     font: {
-                                        size: 14
+                                        size: 16
                                     }
                                 }
                             }
@@ -112,14 +105,9 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                     />
                 }
             </Grid>
-            <Grid
-                className={classes.gridItem}
-                item
-                xs={12}
-                sm={6}
-            >
+            <Grid item className={classes.gridItem} xs={12} sm={6}>
                 {isLoading ?
-                    <CircularProgress /> :
+                    <CircularProgress className={classes.progress} /> :
                     <Percentages
                         increaseCases={increaseCases}
                         increaseDeaths={increaseDeaths}

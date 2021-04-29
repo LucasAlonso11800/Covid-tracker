@@ -8,8 +8,9 @@ const useStyles = makeStyles(() => ({
     form: {
         display: 'flex',
         flexDirection: 'row',
-        width: '50%',
-        justifyContent: 'space-between'
+        width: '100%',
+        justifyContent: 'space-between',
+        padding: '0 1.25em'
     },
     formItem: {
         width: '45%'
