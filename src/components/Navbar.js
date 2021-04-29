@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
-
-import { AppBar, Toolbar, Button } from '@material-ui/core';
+import { AppBar, Toolbar, Button, Link } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import PublicOutlinedIcon from '@material-ui/icons/PublicOutlined';
 import FlagOutlinedIcon from '@material-ui/icons/FlagOutlined';
@@ -18,7 +16,8 @@ const useStyles = makeStyles(() => ({
     link: {
         color: '#ffffff',
         textDecoration: 'none',
-        marginLeft: '0.5em'
+        marginLeft: '0.5em',
+        fontSize: '0.875rem',
     }
 }));
 
@@ -30,11 +29,11 @@ function Navbar() {
             <Toolbar>
                 <Button className={classes.button}>
                     <PublicOutlinedIcon />
-                    <Link to='/' className={classes.link}>Global Covid statistics</Link>
+                    <Link href='#' className={classes.link}>Global Covid statistics</Link>
                 </Button>
                 <Button className={classes.button}>
                     <FlagOutlinedIcon />
-                    <Link to='/local' className={classes.link}>Covid statistics per Country</Link>
+                    <Link href='#' className={classes.link}>Covid statistics per Country</Link>
                 </Button>
             </Toolbar>
         </AppBar>

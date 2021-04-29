@@ -17,28 +17,25 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-function Form({ country, setCountry, countries, date, setDate, local }) {
+function Form({ country, setCountry, countries, date, setDate }) {
     const classes = useStyles();
 
     return (
         <FormControl className={classes.form}>
-            {local ?
-                <Select
-                    className={classes.formItem}
-                    value={country}
-                    onChange={e => setCountry(e.target.value)}
-                >
-                    {countries.map(c => {
-                        return <MenuItem
-                            key={c}
-                            value={c}
-                        >
-                            {c}
-                        </MenuItem>
-                    })}
-                </Select> :
-                <></>
-            }
+            <Select
+                className={classes.formItem}
+                value={country}
+                onChange={e => setCountry(e.target.value)}
+            >
+                {countries.map(c => {
+                    return <MenuItem
+                        key={c}
+                        value={c}
+                    >
+                        {c}
+                    </MenuItem>
+                })}
+            </Select>
             <TextField
                 className={classes.formItem}
                 type='date'

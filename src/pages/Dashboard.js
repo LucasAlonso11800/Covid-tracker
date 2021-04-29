@@ -5,7 +5,7 @@ import Form from '../components/Form';
 import Cards from '../components/Cards';
 import Charts from '../components/Charts';
 
-function LocalDashboard() {
+function Dashboard() {
     const currentDate = new Date();
 
     const [date, setDate] = useState(currentDate);
@@ -57,7 +57,7 @@ function LocalDashboard() {
             .then(res => {
                 setDates(Object.keys(res.data.dates));
                 const data = Object.values(res.data.dates);
-
+                console.log(res.data)
                 const newCases = [];
                 const newRecovered = [];
                 const newDeaths = [];
@@ -182,7 +182,6 @@ function LocalDashboard() {
                 countries={countries}
                 date={dateToString(date)}
                 setDate={setDate}
-                local={true}
             />
             <Cards
                 totalCases={totalCases[totalCases.length - 1]}
@@ -206,4 +205,4 @@ function LocalDashboard() {
     )
 };
 
-export default LocalDashboard;
+export default Dashboard;
