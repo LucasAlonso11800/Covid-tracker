@@ -24,7 +24,8 @@ const useStyles = makeStyles(() => ({
         backgroundColor: '#ffffff',
         margin: '0.5em',
         padding: '0.5em',
-        borderRadius: '1em'
+        borderRadius: '1em',
+        boxShadow: '0 0 5px 0'
     }
 }));
 

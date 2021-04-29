@@ -65,7 +65,7 @@ function LocalDashboard() {
                 const newTotalRecovered = [];
                 const newOpenCases = [];
                 const newTotalDeaths = [];
-                
+
                 data.forEach(d => {
                     newCases.push(d.countries[country].today_new_confirmed);
                     newRecovered.push(d.countries[country].today_new_recovered);
@@ -88,7 +88,7 @@ function LocalDashboard() {
                 setIncreaseDeaths(data[data.length - 1].countries[country].today_vs_yesterday_deaths);
                 setIncreaseOpenCases(data[data.length - 1].countries[country].today_vs_yesterday_open_cases);
                 setIncreaseRecovered(data[data.length - 1].countries[country].today_vs_yesterday_recovered);
-                
+
                 setIsLoading(false);
             })
             .catch(err => console.log(err));
@@ -176,7 +176,7 @@ function LocalDashboard() {
 
     return (
         <>
-            <Form 
+            <Form
                 country={country}
                 setCountry={setCountry}
                 countries={countries}
@@ -184,7 +184,7 @@ function LocalDashboard() {
                 setDate={setDate}
                 local={true}
             />
-            <Cards 
+            <Cards
                 totalCases={totalCases[totalCases.length - 1]}
                 totalDeaths={totalDeaths[totalDeaths.length - 1]}
                 totalRecovered={totalRecovered[totalRecovered.length - 1]}

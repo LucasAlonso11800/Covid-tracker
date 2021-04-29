@@ -10,7 +10,7 @@ import GlobalDashboard from './pages/GlobalDashboard';
 const useStyles = makeStyles(() => ({
     root: {
         padding: '2em 1em',
-        background: 'linear-gradient(to top, #aaa, #ddd)'
+        background: 'linear-gradient(to right, #aaa, #ddd 50%, #aaa)'
     }
 }));
 
