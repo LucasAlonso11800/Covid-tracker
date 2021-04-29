@@ -2,7 +2,7 @@ import React from 'react';
 
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, CircularProgress } from '@material-ui/core';
-import { Bar, Line, } from 'react-chartjs-2';
+import { Bar, Line } from 'react-chartjs-2';
 
 import Percentages from './Percentages';
 

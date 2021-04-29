@@ -28,12 +28,12 @@ function Navbar() {
         <AppBar className={classes.root} position='static'>
             <Toolbar>
                 <Button className={classes.button}>
-                    <PublicOutlinedIcon />
-                    <Link href='#' className={classes.link}>Global Covid statistics</Link>
-                </Button>
-                <Button className={classes.button}>
                     <FlagOutlinedIcon />
                     <Link href='#' className={classes.link}>Covid statistics per Country</Link>
+                </Button>
+                <Button className={classes.button}>
+                    <PublicOutlinedIcon />
+                    <Link href='#' className={classes.link}>Global Covid statistics</Link>
                 </Button>
             </Toolbar>
         </AppBar>

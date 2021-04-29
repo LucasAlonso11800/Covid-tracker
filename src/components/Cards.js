@@ -27,15 +27,15 @@ const useStyles = makeStyles((theme) => ({
         boxShadow: '0 0 5px 0 #000000'
     },
     secondCard: {
-        backgroundColor: theme.palette.error.dark,
-        boxShadow: '0 0 5px 0 #000000'
-    },
-    thirdCard: {
         backgroundColor: theme.palette.success.dark,
         boxShadow: '0 0 5px 0 #000000'
     },
-    fourthCard: {
+    thirdCard: {
         backgroundColor: theme.palette.warning.dark,
+        boxShadow: '0 0 5px 0 #000000'
+    },
+    fourthCard: {
+        backgroundColor: theme.palette.error.dark,
         boxShadow: '0 0 5px 0 #000000'
     },
     progress: {
@@ -68,8 +68,8 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, isLoading }
                         {isLoading ?
                             <CircularProgress className={classes.progress} /> :
                             <>
-                                <Typography className={classes.cardTitle}>Deaths due Covid</Typography>
-                                <Typography className={classes.cardData}>{totalDeaths ? totalDeaths.toLocaleString('en-US') : ''}</Typography>
+                                <Typography className={classes.cardTitle}>Recovered people</Typography>
+                                <Typography className={classes.cardData}>{totalRecovered ? totalRecovered.toLocaleString('en-US') : ''}</Typography>
                             </>
                         }
                     </CardContent>
@@ -81,8 +81,8 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, isLoading }
                         {isLoading ?
                             <CircularProgress className={classes.progress} /> :
                             <>
-                                <Typography className={classes.cardTitle}>Recovered people</Typography>
-                                <Typography className={classes.cardData}>{totalRecovered ? totalRecovered.toLocaleString('en-US') : ''}</Typography>
+                                <Typography className={classes.cardTitle}>People currently with Covid</Typography>
+                                <Typography className={classes.cardData}>{openCases ? openCases.toLocaleString('en-US') : ''}</Typography>
                             </>
                         }
                     </CardContent>
@@ -94,8 +94,8 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, isLoading }
                         {isLoading ?
                             <CircularProgress className={classes.progress} /> :
                             <>
-                                <Typography className={classes.cardTitle}>People currently with Covid</Typography>
-                                <Typography className={classes.cardData}>{openCases ? openCases.toLocaleString('en-US') : ''}</Typography>
+                                <Typography className={classes.cardTitle}>Deaths due Covid</Typography>
+                                <Typography className={classes.cardData}>{totalDeaths ? totalDeaths.toLocaleString('en-US') : ''}</Typography>
                             </>
                         }
                     </CardContent>

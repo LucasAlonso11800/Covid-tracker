@@ -4,6 +4,8 @@ import axios from 'axios';
 import Form from '../components/Form';
 import Cards from '../components/Cards';
 import Charts from '../components/Charts';
+import GlobalCharts from '../components/GlobalCharts';
+import { DateRange } from '@material-ui/icons';
 
 function Dashboard() {
     const currentDate = new Date();
@@ -22,10 +24,15 @@ function Dashboard() {
     const [firstChartData, setFirstChartData] = useState([]);
     const [secondChartData, setSecondChartData] = useState([]);
     const [thirdChartData, setThirdChartData] = useState([]);
+    const [globalChartData, setGlobalChartData] = useState([]);
     const [increaseCases, setIncreaseCases] = useState('');
     const [increaseDeaths, setIncreaseDeaths] = useState('');
     const [increaseOpenCases, setIncreaseOpenCases] = useState('');
     const [increaseRecovered, setIncreaseRecovered] = useState('');
+    const [globalCases, setGlobalCases] = useState('');
+    const [globalRecovered, setGlobalRecovered] = useState('');
+    const [globalOpenCases, setGlobalOpenCases] = useState('');
+    const [globalDeaths, setGlobalDeaths] = useState('');
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -57,7 +64,7 @@ function Dashboard() {
             .then(res => {
                 setDates(Object.keys(res.data.dates));
                 const data = Object.values(res.data.dates);
-                console.log(res.data)
+
                 const newCases = [];
                 const newRecovered = [];
                 const newDeaths = [];
@@ -88,6 +95,11 @@ function Dashboard() {
                 setIncreaseDeaths(data[data.length - 1].countries[country].today_vs_yesterday_deaths);
                 setIncreaseOpenCases(data[data.length - 1].countries[country].today_vs_yesterday_open_cases);
                 setIncreaseRecovered(data[data.length - 1].countries[country].today_vs_yesterday_recovered);
+
+                setGlobalCases(res.data.total.today_confirmed);
+                setGlobalDeaths(res.data.total.today_deaths);
+                setGlobalRecovered(res.data.total.today_recovered);
+                setGlobalOpenCases(res.data.total.today_open_cases);
 
                 setIsLoading(false);
             })
@@ -172,7 +184,20 @@ function Dashboard() {
                 }
             ]
         })
-    }, [totalDeaths])
+        setGlobalChartData({
+            labels: ['Total cases', 'Recovered people', 'Open cases', 'Deaths'],
+            datasets: [
+                {
+                    label: dateToString(date),
+                    data: [globalCases, globalRecovered, globalOpenCases, globalDeaths],
+                    fill: true,
+                    backgroundColor: ['#4791db', '#81c784', '#ffb74d', '#e57373'],
+                    hoverOffset: 2,
+                    indexAxis: 'y'
+                }
+            ]
+        })
+    }, [globalDeaths])
 
     return (
         <>
@@ -199,6 +224,10 @@ function Dashboard() {
                 increaseDeaths={increaseDeaths}
                 increaseOpenCases={increaseOpenCases}
                 increaseRecovered={increaseRecovered}
+                isLoading={isLoading}
+            />
+            <GlobalCharts 
+                globalChartData={globalChartData}
                 isLoading={isLoading}
             />
         </>

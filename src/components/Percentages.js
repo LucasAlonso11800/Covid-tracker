@@ -32,14 +32,6 @@ const useStyles = makeStyles((theme) => ({
         justifyContent: 'center'
     },
     secondCard: {
-        backgroundColor: theme.palette.error.dark,
-        boxShadow: '0 0 5px 0 #000000',
-        height: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    thirdCard: {
         backgroundColor: theme.palette.success.dark,
         boxShadow: '0 0 5px 0 #000000',
         height: '100%',
@@ -47,8 +39,16 @@ const useStyles = makeStyles((theme) => ({
         alignItems: 'center',
         justifyContent: 'center'
     },
-    fourthCard: {
+    thirdCard: {
         backgroundColor: theme.palette.warning.dark,
+        boxShadow: '0 0 5px 0 #000000',
+        height: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
+    fourthCard: {
+        backgroundColor: theme.palette.error.dark,
         boxShadow: '0 0 5px 0 #000000',
         height: '100%',
         display: 'flex',
@@ -70,16 +70,7 @@ function Percentages({ increaseCases, increaseDeaths, increaseOpenCases, increas
                 </Card>
             </Grid>
             <Grid item xs={3} sm={6}>
-
                 <Card className={classes.secondCard}>
-                    <CardContent className={classes.cardContent}>
-                        <Typography className={classes.cardTitle}>Deaths increase since yesterday</Typography>
-                        <Typography className={classes.cardData}>{(Number(increaseDeaths) * 100).toFixed(2)}%</Typography>
-                    </CardContent>
-                </Card>
-            </Grid>
-            <Grid item xs={3} sm={6}>
-                <Card className={classes.thirdCard}>
                     <CardContent className={classes.cardContent}>
                         <Typography className={classes.cardTitle}>Recovered people increase since yesterday</Typography>
                         <Typography className={classes.cardData}>{(Number(increaseRecovered) * 100).toFixed(2)}%</Typography>
@@ -87,10 +78,18 @@ function Percentages({ increaseCases, increaseDeaths, increaseOpenCases, increas
                 </Card>
             </Grid>
             <Grid item xs={3} sm={6}>
-                <Card className={classes.fourthCard}>
+                <Card className={classes.thirdCard}>
                     <CardContent className={classes.cardContent}>
                         <Typography className={classes.cardTitle}>Open cases increase since yesterday</Typography>
                         <Typography className={classes.cardData}>{(Number(increaseOpenCases) * 100).toFixed(2)}%</Typography>
+                    </CardContent>
+                </Card>
+            </Grid>
+            <Grid item xs={3} sm={6}>
+                <Card className={classes.fourthCard}>
+                    <CardContent className={classes.cardContent}>
+                        <Typography className={classes.cardTitle}>Deaths increase since yesterday</Typography>
+                        <Typography className={classes.cardData}>{(Number(increaseDeaths) * 100).toFixed(2)}%</Typography>
                     </CardContent>
                 </Card>
             </Grid>
