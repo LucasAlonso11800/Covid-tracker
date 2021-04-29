@@ -197,7 +197,7 @@ function Dashboard() {
                 }
             ]
         })
-    }, [globalDeaths])
+    }, [isLoading])
 
     return (
         <>

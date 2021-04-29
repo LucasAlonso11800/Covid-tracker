@@ -25,7 +25,7 @@ function Navbar() {
     const classes = useStyles()
 
     return (
-        <AppBar className={classes.root} position='fixed'>
+        <AppBar className={classes.root} position='static'>
             <Toolbar>
                 <Button className={classes.button}>
                     <FlagOutlinedIcon />
