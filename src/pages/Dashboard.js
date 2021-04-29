@@ -4,8 +4,8 @@ import axios from 'axios';
 import Form from '../components/Form';
 import Cards from '../components/Cards';
 import Charts from '../components/Charts';
+import GlobalTitle from '../components/GlobalTitle';
 import GlobalCharts from '../components/GlobalCharts';
-import { DateRange } from '@material-ui/icons';
 
 function Dashboard() {
     const currentDate = new Date();
@@ -224,8 +224,10 @@ function Dashboard() {
                 increaseDeaths={increaseDeaths}
                 increaseOpenCases={increaseOpenCases}
                 increaseRecovered={increaseRecovered}
+                country={country}
                 isLoading={isLoading}
             />
+            <GlobalTitle />
             <GlobalCharts 
                 globalChartData={globalChartData}
                 isLoading={isLoading}

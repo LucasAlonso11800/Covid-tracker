@@ -21,7 +21,7 @@ function Form({ country, setCountry, countries, date, setDate }) {
     const classes = useStyles();
 
     return (
-        <FormControl className={classes.form}>
+        <FormControl className={classes.form} id='local-data'>
             <Select
                 className={classes.formItem}
                 value={country}

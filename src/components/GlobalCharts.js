@@ -20,7 +20,7 @@ const useStyles = makeStyles(() => ({
     chart: {
         backgroundColor: '#ffffff',
         margin: '0.5em',
-        padding: '0.5em',
+        padding: '0.5em 1em',
         borderRadius: '1em',
         boxShadow: '0 0 5px 0'
     }
@@ -30,10 +30,11 @@ function GlobalCharts({ globalChartData, isLoading }) {
     const classes = useStyles();
     return (
         <Grid container className={classes.gridContainer}>
-            <Grid item className={classes.gridItem} xs={12} sm={6}>
+            <Grid item className={classes.gridItem} xs={12}>
                 {isLoading ?
                     <CircularProgress className={classes.progress} /> :
                     <Bar
+                        id='global-data'
                         className={classes.chart}
                         data={globalChartData}
                         options={{
@@ -41,12 +42,12 @@ function GlobalCharts({ globalChartData, isLoading }) {
                             plugins: {
                                 title: {
                                     display: true,
-                                    text: 'Global info',
+                                    text: 'Current status of the pandemic worldwide',
                                     position: 'top',
                                     align: 'start',
                                     color: '#000000',
                                     font: {
-                                        size: 16
+                                        size: 18
                                     }
                                 }
                             }

@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases, increaseDeaths, increaseOpenCases, increaseRecovered, isLoading }) {
+function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases, increaseDeaths, increaseOpenCases, increaseRecovered, country, isLoading }) {
     const classes = useStyles()
 
     return (
@@ -45,7 +45,7 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                             plugins: {
                                 title: {
                                     display: true,
-                                    text: 'Last month daily info',
+                                    text: `${country} - Last month daily info`,
                                     position: 'top',
                                     align: 'start',
                                     color: '#000000',
@@ -69,7 +69,7 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                         plugins: {
                             title: {
                                 display: true,
-                                text: 'Last month daily deaths',
+                                text: `${country} - Last month daily deaths`,
                                 position: 'top',
                                 align: 'start',
                                 color: '#000000',
@@ -93,7 +93,7 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                             plugins: {
                                 title: {
                                     display: true,
-                                    text: 'Evolution of total numbers',
+                                    text: `${country} - Evolution of total numbers`,
                                     position: 'top',
                                     align: 'start',
                                     color: '#000000',

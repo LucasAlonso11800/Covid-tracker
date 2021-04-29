@@ -6,7 +6,7 @@ import { Grid, Card, CardContent, Typography } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
         flexGrow: 1,
-        padding: '0.25em 0.5em',
+        padding: '0 0.5em',
         height: '100%'
     },
     cardTitle: {

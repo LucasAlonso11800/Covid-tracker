@@ -25,15 +25,15 @@ function Navbar() {
     const classes = useStyles()
 
     return (
-        <AppBar className={classes.root} position='static'>
+        <AppBar className={classes.root} position='fixed'>
             <Toolbar>
                 <Button className={classes.button}>
                     <FlagOutlinedIcon />
-                    <Link href='#' className={classes.link}>Covid statistics per Country</Link>
+                    <Link href='#local-data' className={classes.link}>Covid statistics per Country</Link>
                 </Button>
                 <Button className={classes.button}>
                     <PublicOutlinedIcon />
-                    <Link href='#' className={classes.link}>Global Covid statistics</Link>
+                    <Link href='#global-data' className={classes.link}>Global Covid statistics</Link>
                 </Button>
             </Toolbar>
         </AppBar>
