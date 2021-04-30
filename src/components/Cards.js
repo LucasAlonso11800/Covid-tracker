@@ -46,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Cards({ totalCases, totalDeaths, totalRecovered, openCases, isLoading }) {
-    const classes = useStyles()
+    const classes = useStyles();
     return (
         <Grid container className={classes.gridContainer} spacing={2}>
             <Grid item xs={6} md={3}>
@@ -103,6 +103,6 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, isLoading }
             </Grid>
         </Grid>
     )
-}
+};
 
-export default Cards
+export default Cards;

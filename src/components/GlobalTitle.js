@@ -8,7 +8,7 @@ const useStyles = makeStyles(() => ({
         textAlign: 'center',
         margin: '1em 0',
     }
-}))
+}));
 
 function GlobalTitle() {
     const classes = useStyles();
@@ -17,6 +17,6 @@ function GlobalTitle() {
             Global Data
         </Typography>
     )
-}
+};
 
-export default GlobalTitle
+export default GlobalTitle;

@@ -30,7 +30,7 @@ const useStyles = makeStyles(() => ({
 }));
 
 function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases, increaseDeaths, increaseOpenCases, increaseRecovered, country, isLoading }) {
-    const classes = useStyles()
+    const classes = useStyles();
 
     return (
         <Grid container className={classes.gridContainer}>
@@ -122,4 +122,4 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
     )
 };
 
-export default Charts
+export default Charts;
