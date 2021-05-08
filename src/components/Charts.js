@@ -32,6 +32,27 @@ const useStyles = makeStyles(() => ({
 function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases, increaseDeaths, increaseOpenCases, increaseRecovered, country, isLoading }) {
     const classes = useStyles();
 
+    // GENERATE OPTIONS FUNCTION
+    function generateOptions(title) {
+        return (
+            {
+                maintainAspectRatio: false,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: `${country} - ${title}`,
+                        position: 'top',
+                        align: 'start',
+                        color: '#000000',
+                        font: {
+                            size: 16
+                        }
+                    }
+                }
+            }
+        )
+    };
+
     return (
         <Grid container className={classes.gridContainer}>
             <Grid item className={classes.gridItem} xs={12} sm={6}>
@@ -40,46 +61,18 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                     <Line
                         className={classes.chart}
                         data={firstChartData}
-                        options={{
-                            maintainAspectRatio: false,
-                            plugins: {
-                                title: {
-                                    display: true,
-                                    text: `${country} - Last month daily info`,
-                                    position: 'top',
-                                    align: 'start',
-                                    color: '#000000',
-                                    font: {
-                                        size: 16,
-                                    }
-                                }
-                            }
-                        }}
+                        options={generateOptions('Last month daily info')}
                     />
                 }
             </Grid>
             <Grid item className={classes.gridItem} xs={12} sm={6}>
                 {isLoading ?
-                <CircularProgress className={classes.progress} /> :
-                <Bar
-                    className={classes.chart}
-                    data={secondChartData}
-                    options={{
-                        maintainAspectRatio: false,
-                        plugins: {
-                            title: {
-                                display: true,
-                                text: `${country} - Last month daily deaths`,
-                                position: 'top',
-                                align: 'start',
-                                color: '#000000',
-                                font: {
-                                    size: 16
-                                },
-                            }
-                        }
-                    }}
-                />
+                    <CircularProgress className={classes.progress} /> :
+                    <Bar
+                        className={classes.chart}
+                        data={secondChartData}
+                        options={generateOptions('Last month daily deaths')}
+                    />
                 }
             </Grid>
             <Grid item className={classes.gridItem} xs={12} sm={6}>
@@ -88,21 +81,7 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                     <Line
                         className={classes.chart}
                         data={thirdChartData}
-                        options={{
-                            maintainAspectRatio: false,
-                            plugins: {
-                                title: {
-                                    display: true,
-                                    text: `${country} - Evolution of total numbers`,
-                                    position: 'top',
-                                    align: 'start',
-                                    color: '#000000',
-                                    font: {
-                                        size: 16
-                                    }
-                                }
-                            }
-                        }}
+                        options={generateOptions('Evolution of total numbers')}
                     />
                 }
             </Grid>
