@@ -5,7 +5,7 @@ import { Grid, Card, CardContent, Typography, CircularProgress } from '@material
 
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
-        flexGrow: '1',
+        flexGrow: 1,
         margin: '1em 0',
         paddingRight: '1.5em',
         paddingLeft: '0.5em'
@@ -22,21 +22,20 @@ const useStyles = makeStyles((theme) => ({
         fontSize: '1.25rem',
         color: '#ffffff'
     },
-    firstCard: {
+    card: {
+        boxShadow: '0 0 5px 0 #000000'
+    },
+    first: {
         backgroundColor: theme.palette.primary.dark,
-        boxShadow: '0 0 5px 0 #000000'
     },
-    secondCard: {
+    second: {
         backgroundColor: theme.palette.success.dark,
-        boxShadow: '0 0 5px 0 #000000'
     },
-    thirdCard: {
+    third: {
         backgroundColor: theme.palette.warning.dark,
-        boxShadow: '0 0 5px 0 #000000'
     },
-    fourthCard: {
+    fourth: {
         backgroundColor: theme.palette.error.dark,
-        boxShadow: '0 0 5px 0 #000000'
     },
     progress: {
         color: '#ffffff',
@@ -50,7 +49,7 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, isLoading }
     return (
         <Grid container className={classes.gridContainer} spacing={2}>
             <Grid item xs={6} md={3}>
-                <Card className={classes.firstCard}>
+                <Card className={`${classes.card} ${classes.first}`}>
                     <CardContent className={classes.cardContent}>
                         {isLoading ?
                             <CircularProgress className={classes.progress} /> :
@@ -63,7 +62,7 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, isLoading }
                 </Card>
             </Grid>
             <Grid item xs={6} md={3}>
-                <Card className={classes.secondCard}>
+                <Card className={`${classes.card} ${classes.second}`}>
                     <CardContent className={classes.cardContent}>
                         {isLoading ?
                             <CircularProgress className={classes.progress} /> :
@@ -76,7 +75,7 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, isLoading }
                 </Card>
             </Grid>
             <Grid item xs={6} md={3}>
-                <Card className={classes.thirdCard}>
+                <Card className={`${classes.card} ${classes.third}`}>
                     <CardContent className={classes.cardContent}>
                         {isLoading ?
                             <CircularProgress className={classes.progress} /> :
@@ -89,7 +88,7 @@ function Cards({ totalCases, totalDeaths, totalRecovered, openCases, isLoading }
                 </Card>
             </Grid>
             <Grid item xs={6} md={3}>
-                <Card className={classes.fourthCard}>
+                <Card className={`${classes.card} ${classes.fourth}`}>
                     <CardContent className={classes.cardContent}>
                         {isLoading ?
                             <CircularProgress className={classes.progress} /> :
