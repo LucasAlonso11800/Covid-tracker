@@ -53,6 +53,14 @@ function Dashboard() {
     useEffect(() => {
         setIsLoading(true);
 
+        setCases([]);
+        setRecovered([]);
+        setDeaths([]);
+        setTotalCases([]);
+        setTotalRecovered([]);
+        setOpenCases([]);
+        setTotalDeaths([]);
+
         const from = new Date(date.valueOf());
         from.setDate(date.getDate() - 1);
         from.setMonth(date.getMonth() - 1);
@@ -65,124 +73,67 @@ function Dashboard() {
                 setDates(Object.keys(res.data.dates));
                 const data = Object.values(res.data.dates);
 
-                const newCases = [];
-                const newRecovered = [];
-                const newDeaths = [];
-                const newTotalCases = [];
-                const newTotalRecovered = [];
-                const newOpenCases = [];
-                const newTotalDeaths = [];
-
                 data.forEach(d => {
-                    newCases.push(d.countries[country].today_new_confirmed);
-                    newRecovered.push(d.countries[country].today_new_recovered);
-                    newDeaths.push(d.countries[country].today_new_deaths);
-                    newTotalCases.push(d.countries[country].today_confirmed);
-                    newTotalRecovered.push(d.countries[country].today_recovered);
-                    newOpenCases.push(d.countries[country].today_open_cases);
-                    newTotalDeaths.push(d.countries[country].today_deaths);
+                    const currentCountry = d.countries[country]
+
+                    setCases(arr => [...arr, currentCountry.today_new_confirmed]);
+                    setRecovered(arr => [...arr, currentCountry.today_new_recovered]);
+                    setDeaths(arr => [...arr, currentCountry.today_new_deaths]);
+                    setTotalCases(arr => [...arr, currentCountry.today_confirmed]);
+                    setTotalRecovered(arr => [...arr, currentCountry.today_recovered]);
+                    setOpenCases(arr => [...arr, currentCountry.today_open_cases]);
+                    setTotalDeaths(arr => [...arr, currentCountry.today_deaths]);
                 });
 
-                setCases(newCases);
-                setRecovered(newRecovered);
-                setDeaths(newDeaths);
-                setTotalCases(newTotalCases);
-                setTotalRecovered(newTotalRecovered);
-                setOpenCases(newOpenCases);
-                setTotalDeaths(newTotalDeaths);
+                const increase = data[data.length - 1].countries[country];
+                setIncreaseCases(increase.today_vs_yesterday_confirmed);
+                setIncreaseDeaths(increase.today_vs_yesterday_deaths);
+                setIncreaseOpenCases(increase.today_vs_yesterday_open_cases);
+                setIncreaseRecovered(increase.today_vs_yesterday_recovered);
 
-                setIncreaseCases(data[data.length - 1].countries[country].today_vs_yesterday_confirmed);
-                setIncreaseDeaths(data[data.length - 1].countries[country].today_vs_yesterday_deaths);
-                setIncreaseOpenCases(data[data.length - 1].countries[country].today_vs_yesterday_open_cases);
-                setIncreaseRecovered(data[data.length - 1].countries[country].today_vs_yesterday_recovered);
-
-                setGlobalCases(res.data.total.today_confirmed);
-                setGlobalDeaths(res.data.total.today_deaths);
-                setGlobalRecovered(res.data.total.today_recovered);
-                setGlobalOpenCases(res.data.total.today_open_cases);
+                const global = res.data.total
+                setGlobalCases(global.today_confirmed);
+                setGlobalDeaths(global.today_deaths);
+                setGlobalRecovered(global.today_recovered);
+                setGlobalOpenCases(global.today_open_cases);
 
                 setIsLoading(false);
             })
             .catch(err => console.log(err));
     }, [date, country]);
 
+    // GENERATE DATASETS FUNCTIONS
+    function generateDatasets(label, data, border) {
+        return ({
+            label: label,
+            data: data,
+            fill: true,
+            borderColor: border,
+            borderWidth: 2,
+            pointHitRadius: 10,
+            tension: 0.2
+        })
+    };
+
     // CREATE CHARTS
     useEffect(() => {
         setFirstChartData({
             labels: dates,
             datasets: [
-                {
-                    label: 'Daily cases',
-                    data: cases,
-                    fill: true,
-                    borderColor: '#4791db',
-                    borderWidth: 2,
-                    pointHitRadius: 10,
-                    tension: 0.2
-                },
-                {
-                    label: 'Daily recovered',
-                    data: recovered,
-                    fill: true,
-                    borderColor: '#81c784',
-                    borderWidth: 2,
-                    pointHitRadius: 10,
-                    tension: 0.2
-                }]
+                generateDatasets('Daily cases', cases, '#4791db'),
+                generateDatasets('Daily recovered', recovered, '#81c784'),]
         })
         setSecondChartData({
             labels: dates,
-            datasets: [
-                {
-                    label: 'Daily deaths',
-                    data: deaths,
-                    fill: true,
-                    borderColor: '#e57373',
-                    borderWidth: 2,
-                    pointHitRadius: 10,
-                    tension: 0.2
-                }]
+            datasets: [generateDatasets('Daily deaths', deaths, '#e57373')]
         })
         setThirdChartData({
             labels: dates,
             datasets: [
-                {
-                    label: 'Total cases',
-                    data: totalCases,
-                    fill: true,
-                    borderColor: '#4791db',
-                    borderWidth: 2,
-                    pointHitRadius: 10,
-                    tension: 0.2
-                },
-                {
-                    label: 'Total recovered',
-                    data: totalRecovered,
-                    fill: true,
-                    borderColor: '#81c784',
-                    borderWidth: 2,
-                    pointHitRadius: 10,
-                    tension: 0.2
-                },
-                {
-                    label: 'Open cases',
-                    data: openCases,
-                    fill: true,
-                    borderColor: '#ffb74d',
-                    borderWidth: 2,
-                    pointHitRadius: 10,
-                    tension: 0.2
-                },
-                {
-                    label: 'Total deaths',
-                    data: totalDeaths,
-                    fill: true,
-                    borderColor: '#e57373',
-                    borderWidth: 2,
-                    pointHitRadius: 10,
-                    tension: 0.2
-                }
-            ]
+                generateDatasets('Total cases', totalCases, '#4791db'),
+                generateDatasets('Total recovered', totalRecovered, '#81c784'),
+                generateDatasets('Open cases', openCases, '#ffb74d'),
+                generateDatasets('Total deaths', totalDeaths, '#e57373')]
         })
         setGlobalChartData({
             labels: ['Total cases', 'Recovered people', 'Open cases', 'Deaths'],
@@ -228,7 +179,7 @@ function Dashboard() {
                 isLoading={isLoading}
             />
             <GlobalTitle />
-            <GlobalCharts 
+            <GlobalCharts
                 globalChartData={globalChartData}
                 isLoading={isLoading}
             />
