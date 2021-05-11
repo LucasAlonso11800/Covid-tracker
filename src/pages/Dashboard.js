@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 import Form from '../components/Form';
@@ -8,31 +8,28 @@ import GlobalTitle from '../components/GlobalTitle';
 import GlobalCharts from '../components/GlobalCharts';
 
 function Dashboard() {
-    const currentDate = new Date();
+    const currentDate = useRef(new Date());
 
-    const [date, setDate] = useState(currentDate);
-    const [country, setCountry] = useState('Argentina');
+    const [date, setDate] = useState(currentDate.current);
+    const [country, setCountry] = useState('');
     const [countries, setCountries] = useState([]);
     const [dates, setDates] = useState([]);
     const [cases, setCases] = useState([]);
     const [recovered, setRecovered] = useState([]);
     const [deaths, setDeaths] = useState([]);
+
     const [totalCases, setTotalCases] = useState([]);
     const [totalRecovered, setTotalRecovered] = useState([]);
     const [openCases, setOpenCases] = useState([]);
     const [totalDeaths, setTotalDeaths] = useState([]);
+
     const [firstChartData, setFirstChartData] = useState([]);
     const [secondChartData, setSecondChartData] = useState([]);
     const [thirdChartData, setThirdChartData] = useState([]);
     const [globalChartData, setGlobalChartData] = useState([]);
-    const [increaseCases, setIncreaseCases] = useState('');
-    const [increaseDeaths, setIncreaseDeaths] = useState('');
-    const [increaseOpenCases, setIncreaseOpenCases] = useState('');
-    const [increaseRecovered, setIncreaseRecovered] = useState('');
-    const [globalCases, setGlobalCases] = useState('');
-    const [globalRecovered, setGlobalRecovered] = useState('');
-    const [globalOpenCases, setGlobalOpenCases] = useState('');
-    const [globalDeaths, setGlobalDeaths] = useState('');
+
+    const [increaseData, setIncreaseData] = useState({})
+    const [globalData, setGlobalData] = useState({});
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -44,8 +41,20 @@ function Dashboard() {
 
     // GET COUNTRY LIST
     useEffect(() => {
-        axios.get(`${initialURL}/${dateToString(currentDate)}`)
-            .then(res => setCountries(Object.keys(res.data.dates[dateToString(currentDate)].countries)))
+        axios.get(`${initialURL}/${dateToString(currentDate.current)}`)
+            .then(res => {
+                setCountries(Object.keys(res.data.dates[dateToString(currentDate.current)].countries));
+
+                const global = res.data.total
+                setGlobalData({
+                    cases: global.today_confirmed,
+                    recovered: global.today_recovered,
+                    openCases: global.today_open_cases,
+                    deaths: global.today_deaths
+                });
+
+                setCountry('Argentina')
+            })
             .catch(err => console.log(err))
     }, []);
 
@@ -86,23 +95,20 @@ function Dashboard() {
                 });
 
                 const increase = data[data.length - 1].countries[country];
-                setIncreaseCases(increase.today_vs_yesterday_confirmed);
-                setIncreaseDeaths(increase.today_vs_yesterday_deaths);
-                setIncreaseOpenCases(increase.today_vs_yesterday_open_cases);
-                setIncreaseRecovered(increase.today_vs_yesterday_recovered);
-
-                const global = res.data.total
-                setGlobalCases(global.today_confirmed);
-                setGlobalDeaths(global.today_deaths);
-                setGlobalRecovered(global.today_recovered);
-                setGlobalOpenCases(global.today_open_cases);
+                setIncreaseData({
+                    cases: increase.today_vs_yesterday_confirmed,
+                    recovered: increase.today_vs_yesterday_recovered,
+                    openCases: increase.today_vs_yesterday_open_cases,
+                    deaths: increase.today_vs_yesterday_deaths
+                });
 
                 setIsLoading(false);
             })
             .catch(err => console.log(err));
     }, [date, country]);
 
-    // GENERATE DATASETS FUNCTIONS
+
+    // GENERATE DATASETS FOR CHARTS
     function generateDatasets(label, data, border) {
         return ({
             label: label,
@@ -140,7 +146,7 @@ function Dashboard() {
             datasets: [
                 {
                     label: dateToString(date),
-                    data: [globalCases, globalRecovered, globalOpenCases, globalDeaths],
+                    data: [globalData.cases, globalData.recovered, globalData.openCases, globalData.deaths],
                     fill: true,
                     backgroundColor: ['#4791db', '#81c784', '#ffb74d', '#e57373'],
                     hoverOffset: 2,
@@ -171,10 +177,7 @@ function Dashboard() {
                 firstChartData={firstChartData}
                 secondChartData={secondChartData}
                 thirdChartData={thirdChartData}
-                increaseCases={increaseCases}
-                increaseDeaths={increaseDeaths}
-                increaseOpenCases={increaseOpenCases}
-                increaseRecovered={increaseRecovered}
+                increaseData={increaseData}
                 country={country}
                 isLoading={isLoading}
             />

@@ -29,7 +29,7 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases, increaseDeaths, increaseOpenCases, increaseRecovered, country, isLoading }) {
+function Charts({ firstChartData, secondChartData, thirdChartData, increaseData, country, isLoading }) {
     const classes = useStyles();
 
     // GENERATE OPTIONS FUNCTION
@@ -89,11 +89,7 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                 {isLoading ?
                     <CircularProgress className={classes.progress} /> :
                     <Percentages
-                        increaseCases={increaseCases}
-                        increaseDeaths={increaseDeaths}
-                        increaseOpenCases={increaseOpenCases}
-                        increaseRecovered={increaseRecovered}
-                        isLoading={isLoading}
+                        increaseData={increaseData}
                     />
                 }
             </Grid>
