@@ -1,4 +1,5 @@
 import React from 'react';
+import { generateOptions } from '../functions';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, CircularProgress } from '@material-ui/core';
 import { Bar } from 'react-chartjs-2';
@@ -37,23 +38,8 @@ function GlobalCharts({ globalChartData, isLoading }) {
                         id='global-data'
                         className={classes.chart}
                         data={globalChartData}
-                        options={{
-                            maintainAspectRatio: false,
-                            plugins: {
-                                title: {
-                                    display: true,
-                                    text: 'Current status of the pandemic worldwide',
-                                    position: 'top',
-                                    align: 'start',
-                                    color: '#000000',
-                                    font: {
-                                        size: 18
-                                    }
-                                }
-                            }
-                        }}
-                    />
-                }
+                        options={generateOptions('Current status of the pandemic worldwide', 18)}
+                    />}
             </Grid>
         </Grid>
     )

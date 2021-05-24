@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { dateToString, generateDatasets } from '../functions';
 
 import Form from '../components/Form';
 import Cards from '../components/Cards';
@@ -34,10 +35,6 @@ function Dashboard() {
     const [isLoading, setIsLoading] = useState(true);
 
     const initialURL = 'https://api.covid19tracking.narrativa.com/api';
-
-    function dateToString(date) {
-        return date.toISOString().substring(0, 10)
-    };
 
     // GET COUNTRY LIST
     useEffect(() => {
@@ -107,27 +104,13 @@ function Dashboard() {
             .catch(err => console.log(err));
     }, [date, country]);
 
-
-    // GENERATE DATASETS FOR CHARTS
-    function generateDatasets(label, data, border) {
-        return ({
-            label: label,
-            data: data,
-            fill: true,
-            borderColor: border,
-            borderWidth: 2,
-            pointHitRadius: 10,
-            tension: 0.2
-        })
-    };
-
     // CREATE CHARTS
     useEffect(() => {
         setFirstChartData({
             labels: dates,
             datasets: [
                 generateDatasets('Daily cases', cases, '#4791db'),
-                generateDatasets('Daily recovered', recovered, '#81c784'),]
+                generateDatasets('Daily recovered', recovered, '#81c784')]
         })
         setSecondChartData({
             labels: dates,
@@ -143,16 +126,14 @@ function Dashboard() {
         })
         setGlobalChartData({
             labels: ['Total cases', 'Recovered people', 'Open cases', 'Deaths'],
-            datasets: [
-                {
-                    label: dateToString(date),
-                    data: [globalData.cases, globalData.recovered, globalData.openCases, globalData.deaths],
-                    fill: true,
-                    backgroundColor: ['#4791db', '#81c784', '#ffb74d', '#e57373'],
-                    hoverOffset: 2,
-                    indexAxis: 'y'
-                }
-            ]
+            datasets: [{
+                label: dateToString(date),
+                data: [globalData.cases, globalData.recovered, globalData.openCases, globalData.deaths],
+                fill: true,
+                backgroundColor: ['#4791db', '#81c784', '#ffb74d', '#e57373'],
+                hoverOffset: 2,
+                indexAxis: 'y'
+            }]
         })
     }, [isLoading])
 

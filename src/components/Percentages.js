@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { getPercentage } from '../functions';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography } from '@material-ui/core';
 
@@ -48,10 +48,6 @@ function Percentages({ increaseData }) {
     const classes = useStyles();
     
     const { cases, recovered, openCases, deaths } = increaseData;
-
-    function getPercentage(data){
-        return (data * 100).toFixed(2)
-    };
 
     return (
         <Grid container className={classes.gridContainer} spacing={2}>
