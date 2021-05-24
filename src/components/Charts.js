@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { generateOptions } from '../functions';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, CircularProgress } from '@material-ui/core';
 import { Bar, Line } from 'react-chartjs-2';
@@ -29,29 +29,8 @@ const useStyles = makeStyles(() => ({
     }
 }));
 
-function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases, increaseDeaths, increaseOpenCases, increaseRecovered, country, isLoading }) {
+function Charts({ firstChartData, secondChartData, thirdChartData, increaseData, isLoading }) {
     const classes = useStyles();
-
-    // GENERATE OPTIONS FUNCTION
-    function generateOptions(title) {
-        return (
-            {
-                maintainAspectRatio: false,
-                plugins: {
-                    title: {
-                        display: true,
-                        text: `${country} - ${title}`,
-                        position: 'top',
-                        align: 'start',
-                        color: '#000000',
-                        font: {
-                            size: 16
-                        }
-                    }
-                }
-            }
-        )
-    };
 
     return (
         <Grid container className={classes.gridContainer}>
@@ -61,9 +40,8 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                     <Line
                         className={classes.chart}
                         data={firstChartData}
-                        options={generateOptions('Last month daily info')}
-                    />
-                }
+                        options={generateOptions('Last month daily info', 16)}
+                    />}
             </Grid>
             <Grid item className={classes.gridItem} xs={12} sm={6}>
                 {isLoading ?
@@ -71,9 +49,8 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                     <Bar
                         className={classes.chart}
                         data={secondChartData}
-                        options={generateOptions('Last month daily deaths')}
-                    />
-                }
+                        options={generateOptions('Last month daily deaths', 16)}
+                    />}
             </Grid>
             <Grid item className={classes.gridItem} xs={12} sm={6}>
                 {isLoading ?
@@ -81,21 +58,13 @@ function Charts({ firstChartData, secondChartData, thirdChartData, increaseCases
                     <Line
                         className={classes.chart}
                         data={thirdChartData}
-                        options={generateOptions('Evolution of total numbers')}
-                    />
-                }
+                        options={generateOptions('Evolution of total numbers', 16)}
+                    />}
             </Grid>
             <Grid item className={classes.gridItem} xs={12} sm={6}>
                 {isLoading ?
                     <CircularProgress className={classes.progress} /> :
-                    <Percentages
-                        increaseCases={increaseCases}
-                        increaseDeaths={increaseDeaths}
-                        increaseOpenCases={increaseOpenCases}
-                        increaseRecovered={increaseRecovered}
-                        isLoading={isLoading}
-                    />
-                }
+                    <Percentages increaseData={increaseData} />}
             </Grid>
         </Grid>
     )
