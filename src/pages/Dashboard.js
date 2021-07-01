@@ -38,21 +38,22 @@ function Dashboard() {
 
     // GET COUNTRY LIST
     useEffect(() => {
-        axios.get(`${initialURL}/${dateToString(currentDate.current)}`)
-            .then(res => {
-                setCountries(Object.keys(res.data.dates[dateToString(currentDate.current)].countries));
-
-                const global = res.data.total
+        (async () => {
+            try {
+                const data = await (await axios.get(`${initialURL}/${dateToString(currentDate.current)}`)).data
+                setCountries(Object.keys(data.dates[dateToString(currentDate.current)].countries));
                 setGlobalData({
-                    cases: global.today_confirmed,
-                    recovered: global.today_recovered,
-                    openCases: global.today_open_cases,
-                    deaths: global.today_deaths
+                    cases: data.total.today_confirmed,
+                    recovered: data.total.today_recovered,
+                    openCases: data.total.today_open_cases,
+                    deaths: data.total.today_deaths
                 });
-
                 setCountry('Argentina')
-            })
-            .catch(err => console.log(err))
+            }
+            catch (err) {
+                console.log(err)
+            }
+        })()
     }, []);
 
     // GET DATA
@@ -74,10 +75,11 @@ function Dashboard() {
         const to = new Date(date.valueOf());
         to.setDate(date.getDate() - 1);
 
-        axios.get(`${initialURL}/country/${country.toLowerCase()}?date_from=${dateToString(from)}&date_to=${dateToString(to)}`)
-            .then(res => {
-                setDates(Object.keys(res.data.dates));
-                const data = Object.values(res.data.dates);
+        (async () => {
+            try {
+                const info = await (await axios.get(`${initialURL}/country/${country.toLowerCase()}?date_from=${dateToString(from)}&date_to=${dateToString(to)}`)).data
+                setDates(Object.keys(info.dates));
+                const data = Object.values(info.dates);
 
                 data.forEach(d => {
                     const currentCountry = d.countries[country]
@@ -100,8 +102,11 @@ function Dashboard() {
                 });
 
                 setIsLoading(false);
-            })
-            .catch(err => console.log(err));
+            }
+            catch (err) {
+                console.log(err)
+            }
+        })();
     }, [date, country]);
 
     // CREATE CHARTS
