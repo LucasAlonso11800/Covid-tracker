@@ -1,12 +1,13 @@
 const {
     GraphQLSchema,
-    GraphQLObjectType
+    GraphQLObjectType,
 } = require('graphql');
+const GET_GLOBAL_DATA= require('./Queries/GlobalData');
 
 const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
-
+        globalData: GET_GLOBAL_DATA
     }
 });
 
