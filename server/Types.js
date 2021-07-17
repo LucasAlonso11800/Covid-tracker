@@ -1,6 +1,6 @@
 const {
     GraphQLObjectType,
-    // GraphQLString,
+    GraphQLList,
     GraphQLInt
 } = require('graphql');
 
@@ -14,4 +14,13 @@ const GlobalDataType = new GraphQLObjectType({
     })
 });
 
-module.exports = { GlobalDataType };
+const CountryDailyInfoType = new GraphQLObjectType({
+    name: 'CountryDailyInfo',
+    fields: () => ({
+        today_new_confirmed: { type: new GraphQLList(GraphQLInt) },
+        today_new_deaths: { type: new GraphQLList(GraphQLInt) },
+        today_new_recovered: { type: new GraphQLList(GraphQLInt) },
+    })
+});
+
+module.exports = { GlobalDataType, CountryDailyInfoType };
