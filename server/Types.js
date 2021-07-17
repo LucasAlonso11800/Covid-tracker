@@ -17,10 +17,20 @@ const GlobalDataType = new GraphQLObjectType({
 const CountryDailyInfoType = new GraphQLObjectType({
     name: 'CountryDailyInfo',
     fields: () => ({
-        today_new_confirmed: { type: new GraphQLList(GraphQLInt) },
-        today_new_deaths: { type: new GraphQLList(GraphQLInt) },
-        today_new_recovered: { type: new GraphQLList(GraphQLInt) },
+        new_confirmed: { type: new GraphQLList(GraphQLInt) },
+        new_deaths: { type: new GraphQLList(GraphQLInt) },
+        new_recovered: { type: new GraphQLList(GraphQLInt) },
     })
 });
 
-module.exports = { GlobalDataType, CountryDailyInfoType };
+const CountryTotalsType = new GraphQLObjectType({
+    name: 'CountryTotals',
+    fields: () => ({
+        total_confirmed: { type: new GraphQLList(GraphQLInt) },
+        total_deaths: { type: new GraphQLList(GraphQLInt) },
+        total_recovered: { type: new GraphQLList(GraphQLInt) },
+        total_open_cases: { type: new GraphQLList(GraphQLInt) },
+    })
+});
+
+module.exports = { GlobalDataType, CountryDailyInfoType, CountryTotalsType };
