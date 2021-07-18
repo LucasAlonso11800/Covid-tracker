@@ -57,3 +57,22 @@ export const GET_GLOBAL_DATA = gql`
         }
     }
 `
+
+export const GET_COUNTRY_TOTALS = gql`
+    query countryTotals(
+        $country: String!
+        $from_date: String!
+        $to_date: String!
+    )   {
+        countryTotals(
+            country: $country,
+            from_date: $from_date,
+            to_date: $to_date
+        ){
+            total_confirmed
+            total_recovered
+            total_open_cases
+            total_deaths
+        }
+    }
+`

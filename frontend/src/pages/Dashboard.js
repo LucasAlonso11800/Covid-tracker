@@ -38,18 +38,6 @@ function Dashboard() {
 
     const initialURL = 'https://api.covid19tracking.narrativa.com/api';
 
-    // GET COUNTRY LIST
-    useEffect(() => {
-        (async () => {
-            try {
-                const data = await (await axios.get(`${initialURL}/${dateToString(currentDate.current)}`)).data
-            }
-            catch (err) {
-                console.log(err)
-            }
-        })()
-    }, []);
-
     // GET DATA
     useEffect(() => {
         setIsLoading(true);
@@ -120,14 +108,7 @@ function Dashboard() {
     return (
         <div className={classes.root}>
             <Form />
-            <Cards
-                totalCases={totalCases[totalCases.length - 1]}
-                totalDeaths={totalDeaths[totalDeaths.length - 1]}
-                totalRecovered={totalRecovered[totalRecovered.length - 1]}
-                openCases={openCases[openCases.length - 1]}
-                date={dates[dates.length - 1]}
-                isLoading={isLoading}
-            />
+            <Cards />
             <Charts
                 firstChartData={firstChartData}
                 secondChartData={secondChartData}
