@@ -1,14 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { dateToString, generateDatasets } from '../functions';
-
+import { makeStyles } from '@material-ui/core/styles';
 import Form from '../components/Form';
 import Cards from '../components/Cards';
 import Charts from '../components/Charts';
 import GlobalTitle from '../components/GlobalTitle';
 import GlobalCharts from '../components/GlobalCharts';
 
+const useStyles = makeStyles(() => ({
+    root: {
+        padding: '2em 1em',
+        background: 'linear-gradient(to right, #aaa, #ddd 50%, #aaa)'
+    }
+}));
+
 function Dashboard() {
+    const classes = useStyles()
     const currentDate = useRef(new Date());
 
     const [date, setDate] = useState(currentDate.current);
@@ -143,7 +151,7 @@ function Dashboard() {
     }, [isLoading])
 
     return (
-        <>
+        <div className={classes.root}>
             <Form
                 country={country}
                 setCountry={setCountry}
@@ -172,7 +180,7 @@ function Dashboard() {
                 globalChartData={globalChartData}
                 isLoading={isLoading}
             />
-        </>
+        </div>
     )
 };
 

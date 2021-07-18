@@ -1,26 +1,18 @@
 import './App.css';
-
-import { makeStyles } from '@material-ui/core/styles';
-
+import { ApolloClient, ApolloProvider } from '@apollo/client';
 import Navbar from './components/Navbar';
 import Dashboard from './pages/Dashboard'
 
-const useStyles = makeStyles(() => ({
-    root: {
-        padding: '2em 1em',
-        background: 'linear-gradient(to right, #aaa, #ddd 50%, #aaa)'
-    }
-}));
+const client = new ApolloClient({
+    uri: "http://localhost:5000/graphql"
+})
 
 function App() {
-    const classes = useStyles()
     return (
-        <>
+        <ApolloProvider client={client}>
             <Navbar />
-            <div className={classes.root}>
-                <Dashboard/>
-            </div>
-        </>
+            <Dashboard />
+        </ApolloProvider>
     );
 }
 
