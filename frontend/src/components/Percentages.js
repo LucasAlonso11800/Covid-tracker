@@ -1,7 +1,10 @@
-import React from 'react';
-import { getPercentage } from '../functions';
+import React, { useContext } from 'react';
+import { GlobalContext } from '../Context';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography } from '@material-ui/core';
+// GraphQL
+import { useQuery } from '@apollo/client';
+import { GET_COUNTRY_DAILY_INCREASE } from '../GraphQL/Queries';
 
 const useStyles = makeStyles((theme) => ({
     gridContainer: {
@@ -44,10 +47,17 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Percentages({ increaseData }) {
+function Percentages() {
     const classes = useStyles();
-    
-    const { cases, recovered, openCases, deaths } = increaseData;
+    const [{ country, from_date, to_date }, setFilters] = useContext(GlobalContext);
+
+    const { loading, data } = useQuery(GET_COUNTRY_DAILY_INCREASE, {
+        variables: {
+            country,
+            from_date,
+            to_date
+        }
+    });
 
     return (
         <Grid container className={classes.gridContainer} spacing={2}>
@@ -55,7 +65,7 @@ function Percentages({ increaseData }) {
                 <Card className={`${classes.card} ${classes.first}`}>
                     <CardContent className={classes.cardContent}>
                         <Typography className={classes.cardTitle}>Cases increase since yesterday</Typography>
-                        <Typography className={classes.cardData}>{getPercentage(cases)}%</Typography>
+                        <Typography className={classes.cardData}>{data.countryDailyIncrease.confirmed_increase}%</Typography>
                     </CardContent>
                 </Card>
             </Grid>
@@ -63,7 +73,7 @@ function Percentages({ increaseData }) {
                 <Card className={`${classes.card} ${classes.second}`}>
                     <CardContent className={classes.cardContent}>
                         <Typography className={classes.cardTitle}>Recovered people increase since yesterday</Typography>
-                        <Typography className={classes.cardData}>{getPercentage(recovered)}%</Typography>
+                        <Typography className={classes.cardData}>{data.countryDailyIncrease.recovered_increase}%</Typography>
                     </CardContent>
                 </Card>
             </Grid>
@@ -71,7 +81,7 @@ function Percentages({ increaseData }) {
                 <Card className={`${classes.card} ${classes.third}`}>
                     <CardContent className={classes.cardContent}>
                         <Typography className={classes.cardTitle}>Open cases increase since yesterday</Typography>
-                        <Typography className={classes.cardData}>{getPercentage(openCases)}%</Typography>
+                        <Typography className={classes.cardData}>{data.countryDailyIncrease.open_cases_increase}%</Typography>
                     </CardContent>
                 </Card>
             </Grid>
@@ -79,7 +89,7 @@ function Percentages({ increaseData }) {
                 <Card className={`${classes.card} ${classes.fourth}`}>
                     <CardContent className={classes.cardContent}>
                         <Typography className={classes.cardTitle}>Deaths increase since yesterday</Typography>
-                        <Typography className={classes.cardData}>{getPercentage(deaths)}%</Typography>
+                        <Typography className={classes.cardData}>{data.countryDailyIncrease.deaths_increase}%</Typography>
                     </CardContent>
                 </Card>
             </Grid>

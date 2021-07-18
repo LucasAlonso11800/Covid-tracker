@@ -93,7 +93,7 @@ function Form({ countries, setFilters }) {
     };
 
     return (
-        <form className={classes.form} onSubmit={formik.handleSubmit}>
+        <form className={classes.form} onSubmit={formik.handleSubmit} id="local-data">
             <TextField
                 label='Country'
                 name='country'

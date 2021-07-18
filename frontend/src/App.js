@@ -1,17 +1,21 @@
 import './App.css';
-import { ApolloClient, ApolloProvider } from '@apollo/client';
-import Navbar from './components/Navbar';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { GlobalProvider } from './Context';
 import Dashboard from './pages/Dashboard'
+import Navbar from './components/Navbar';
 
 const client = new ApolloClient({
-    uri: "http://localhost:5000/graphql"
+    uri: "http://localhost:5000/graphql",
+    cache: new InMemoryCache(),
 })
 
 function App() {
     return (
         <ApolloProvider client={client}>
-            <Navbar />
-            <Dashboard />
+            <GlobalProvider>
+                <Navbar />
+                <Dashboard />
+            </GlobalProvider>
         </ApolloProvider>
     );
 }
