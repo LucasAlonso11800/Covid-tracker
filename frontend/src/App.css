@@ -9,3 +9,7 @@
 body{
     min-width: 400px;
 }
+
+.MuiButton-root{
+    text-transform: none!important;
+}
