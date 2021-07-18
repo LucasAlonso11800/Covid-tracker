@@ -18,3 +18,27 @@ export const GET_COUNTRY_DAILY_INCREASE = gql`
             }
         }
 `;
+
+export const GET_DATES = gql`
+    query dates(
+        $country: String!
+        $from_date: String!
+        $to_date: String!
+    )   {
+        dates(
+            country: $country,
+            from_date: $from_date,
+            to_date: $to_date
+        )
+    }
+`
+
+export const GET_COUNTRIES = gql`
+    query countries(
+        $date: String!
+    )   {
+        countries(
+            date: $date,
+        )
+    }
+`

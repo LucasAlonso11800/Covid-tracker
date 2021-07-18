@@ -65,7 +65,7 @@ function Percentages() {
                 <Card className={`${classes.card} ${classes.first}`}>
                     <CardContent className={classes.cardContent}>
                         <Typography className={classes.cardTitle}>Cases increase since yesterday</Typography>
-                        <Typography className={classes.cardData}>{data.countryDailyIncrease.confirmed_increase}%</Typography>
+                        <Typography className={classes.cardData}>{data?.countryDailyIncrease.confirmed_increase}%</Typography>
                     </CardContent>
                 </Card>
             </Grid>
@@ -73,7 +73,7 @@ function Percentages() {
                 <Card className={`${classes.card} ${classes.second}`}>
                     <CardContent className={classes.cardContent}>
                         <Typography className={classes.cardTitle}>Recovered people increase since yesterday</Typography>
-                        <Typography className={classes.cardData}>{data.countryDailyIncrease.recovered_increase}%</Typography>
+                        <Typography className={classes.cardData}>{data?.countryDailyIncrease.recovered_increase}%</Typography>
                     </CardContent>
                 </Card>
             </Grid>
@@ -81,7 +81,7 @@ function Percentages() {
                 <Card className={`${classes.card} ${classes.third}`}>
                     <CardContent className={classes.cardContent}>
                         <Typography className={classes.cardTitle}>Open cases increase since yesterday</Typography>
-                        <Typography className={classes.cardData}>{data.countryDailyIncrease.open_cases_increase}%</Typography>
+                        <Typography className={classes.cardData}>{data?.countryDailyIncrease.open_cases_increase}%</Typography>
                     </CardContent>
                 </Card>
             </Grid>
@@ -89,7 +89,7 @@ function Percentages() {
                 <Card className={`${classes.card} ${classes.fourth}`}>
                     <CardContent className={classes.cardContent}>
                         <Typography className={classes.cardTitle}>Deaths increase since yesterday</Typography>
-                        <Typography className={classes.cardData}>{data.countryDailyIncrease.deaths_increase}%</Typography>
+                        <Typography className={classes.cardData}>{data?.countryDailyIncrease.deaths_increase}%</Typography>
                     </CardContent>
                 </Card>
             </Grid>

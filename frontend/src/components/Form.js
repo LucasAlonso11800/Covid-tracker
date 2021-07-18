@@ -1,8 +1,13 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useContext } from 'react';
+import { GlobalContext } from '../Context';
 import { TextField, Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import { dateToString } from '../functions';
+// GraphQL
+import { useQuery } from '@apollo/client';
+import { GET_COUNTRIES } from '../GraphQL/Queries';
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -29,7 +34,12 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-function Form({ countries, setFilters }) {
+function Form() {
+    const [{ from_date }, setFilters] = useContext(GlobalContext);
+    const { loading, data } = useQuery(GET_COUNTRIES, {
+        variables: { date: from_date }
+    });
+
     const classes = useStyles();
 
     const validationSchema = yup.object({
@@ -44,7 +54,7 @@ function Form({ countries, setFilters }) {
     const formik = useFormik({
         initialValues: {
             country: 'Argentina',
-            date: new Date().toISOString().substring(0, 10)
+            date: dateToString(new Date())
         },
         validationSchema: validationSchema,
         onSubmit: (values) => setFilters(values)
@@ -106,7 +116,7 @@ function Form({ countries, setFilters }) {
                 error={formik.touched.country && Boolean(formik.errors.country)}
                 helperText={formik.touched.country && formik.errors.country}
             >
-                {countries.map(c => {
+                {data?.countries.map(c => {
                     return <option
                         key={c}
                         value={c}
