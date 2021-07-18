@@ -4,7 +4,6 @@ import { TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { dateToString } from '../functions';
 // GraphQL
 import { useQuery } from '@apollo/client';
 import { GET_COUNTRIES } from '../GraphQL/Queries';
@@ -35,9 +34,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Form() {
-    const [{ from_date }, setFilters] = useContext(GlobalContext);
+    const [{ today }, setFilters] = useContext(GlobalContext);
     const { loading, data } = useQuery(GET_COUNTRIES, {
-        variables: { date: from_date }
+        variables: { date: today }
     });
 
     const classes = useStyles();
@@ -54,7 +53,7 @@ function Form() {
     const formik = useFormik({
         initialValues: {
             country: 'Argentina',
-            date: dateToString(new Date())
+            date: today
         },
         validationSchema: validationSchema,
         onSubmit: (values) => setFilters(values)

@@ -42,3 +42,18 @@ export const GET_COUNTRIES = gql`
         )
     }
 `
+
+export const GET_GLOBAL_DATA = gql`
+    query globalData(
+        $date: String!
+    )   {
+        globalData(
+            date: $date,
+        ){
+            today_confirmed
+            today_recovered
+            today_open_cases
+            today_deaths
+        }
+    }
+`

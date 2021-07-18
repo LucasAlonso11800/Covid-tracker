@@ -17,6 +17,7 @@ export const GlobalProvider = ({ children }) => {
         country: 'Argentina',
         from_date: dateToString(from),
         to_date: dateToString(to),
+        today: dateToString(today)
     });
 
     return (

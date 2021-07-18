@@ -20,8 +20,6 @@ function Dashboard() {
     const currentDate = useRef(new Date());
 
     const [date, setDate] = useState(currentDate.current);
-    const [country, setCountry] = useState('');
-    const [countries, setCountries] = useState([]);
     const [dates, setDates] = useState([]);
     const [cases, setCases] = useState([]);
     const [recovered, setRecovered] = useState([]);
@@ -38,7 +36,6 @@ function Dashboard() {
     const [globalChartData, setGlobalChartData] = useState([]);
 
     const [increaseData, setIncreaseData] = useState({})
-    const [globalData, setGlobalData] = useState({});
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -49,14 +46,6 @@ function Dashboard() {
         (async () => {
             try {
                 const data = await (await axios.get(`${initialURL}/${dateToString(currentDate.current)}`)).data
-                setCountries(Object.keys(data.dates[dateToString(currentDate.current)].countries));
-                setGlobalData({
-                    cases: data.total.today_confirmed,
-                    recovered: data.total.today_recovered,
-                    openCases: data.total.today_open_cases,
-                    deaths: data.total.today_deaths
-                });
-                setCountry('Argentina')
             }
             catch (err) {
                 console.log(err)
@@ -85,12 +74,12 @@ function Dashboard() {
 
         (async () => {
             try {
-                const info = await (await axios.get(`${initialURL}/country/${country.toLowerCase()}?date_from=${dateToString(from)}&date_to=${dateToString(to)}`)).data
+                const info = await (await axios.get(`${initialURL}/country/Argentina?date_from=${dateToString(from)}&date_to=${dateToString(to)}`)).data
                 setDates(Object.keys(info.dates));
                 const data = Object.values(info.dates);
 
                 data.forEach(d => {
-                    const currentCountry = d.countries[country]
+                    const currentCountry = d.countries['Argentina']
 
                     setCases(arr => [...arr, currentCountry.today_new_confirmed]);
                     setRecovered(arr => [...arr, currentCountry.today_new_recovered]);
@@ -101,7 +90,7 @@ function Dashboard() {
                     setTotalDeaths(arr => [...arr, currentCountry.today_deaths]);
                 });
 
-                const increase = data[data.length - 1].countries[country];
+                const increase = data[data.length - 1].countries['Argentina'];
                 setIncreaseData({
                     cases: increase.today_vs_yesterday_confirmed,
                     recovered: increase.today_vs_yesterday_recovered,
@@ -115,7 +104,7 @@ function Dashboard() {
                 console.log(err)
             }
         })();
-    }, [date, country]);
+    }, [date]);
 
     // CREATE CHARTS
     useEffect(() => {
@@ -137,28 +126,11 @@ function Dashboard() {
                 generateDatasets('Open cases', openCases, '#ffb74d'),
                 generateDatasets('Total deaths', totalDeaths, '#e57373')]
         })
-        setGlobalChartData({
-            labels: ['Total cases', 'Recovered people', 'Open cases', 'Deaths'],
-            datasets: [{
-                label: dateToString(date),
-                data: [globalData.cases, globalData.recovered, globalData.openCases, globalData.deaths],
-                fill: true,
-                backgroundColor: ['#4791db', '#81c784', '#ffb74d', '#e57373'],
-                hoverOffset: 2,
-                indexAxis: 'y'
-            }]
-        })
     }, [isLoading])
 
     return (
         <div className={classes.root}>
-            <Form
-                country={country}
-                setCountry={setCountry}
-                countries={countries}
-                date={dateToString(date)}
-                setDate={setDate}
-            />
+            <Form />
             <Cards
                 totalCases={totalCases[totalCases.length - 1]}
                 totalDeaths={totalDeaths[totalDeaths.length - 1]}
@@ -172,14 +144,11 @@ function Dashboard() {
                 secondChartData={secondChartData}
                 thirdChartData={thirdChartData}
                 increaseData={increaseData}
-                country={country}
+                country={'Argentina'}
                 isLoading={isLoading}
             />
             <GlobalTitle />
-            <GlobalCharts
-                globalChartData={globalChartData}
-                isLoading={isLoading}
-            />
+            <GlobalCharts />
         </div>
     )
 };
