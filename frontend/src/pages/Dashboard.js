@@ -33,9 +33,6 @@ function Dashboard() {
     const [firstChartData, setFirstChartData] = useState([]);
     const [secondChartData, setSecondChartData] = useState([]);
     const [thirdChartData, setThirdChartData] = useState([]);
-    const [globalChartData, setGlobalChartData] = useState([]);
-
-    const [increaseData, setIncreaseData] = useState({})
 
     const [isLoading, setIsLoading] = useState(true);
 
@@ -90,14 +87,6 @@ function Dashboard() {
                     setTotalDeaths(arr => [...arr, currentCountry.today_deaths]);
                 });
 
-                const increase = data[data.length - 1].countries['Argentina'];
-                setIncreaseData({
-                    cases: increase.today_vs_yesterday_confirmed,
-                    recovered: increase.today_vs_yesterday_recovered,
-                    openCases: increase.today_vs_yesterday_open_cases,
-                    deaths: increase.today_vs_yesterday_deaths
-                });
-
                 setIsLoading(false);
             }
             catch (err) {
@@ -143,7 +132,6 @@ function Dashboard() {
                 firstChartData={firstChartData}
                 secondChartData={secondChartData}
                 thirdChartData={thirdChartData}
-                increaseData={increaseData}
                 country={'Argentina'}
                 isLoading={isLoading}
             />

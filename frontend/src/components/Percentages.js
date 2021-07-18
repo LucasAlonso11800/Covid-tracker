@@ -1,9 +1,9 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { GlobalContext } from '../Context';
 import { makeStyles } from '@material-ui/core/styles';
 import { Grid, Card, CardContent, Typography } from '@material-ui/core';
 // GraphQL
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { GET_COUNTRY_DAILY_INCREASE } from '../GraphQL/Queries';
 
 const useStyles = makeStyles((theme) => ({
@@ -49,15 +49,20 @@ const useStyles = makeStyles((theme) => ({
 
 function Percentages() {
     const classes = useStyles();
-    const [{ country, from_date, to_date }, setFilters] = useContext(GlobalContext);
+    const [filters, setFilters] = useContext(GlobalContext);
 
-    const { loading, data } = useQuery(GET_COUNTRY_DAILY_INCREASE, {
-        variables: {
-            country,
-            from_date,
-            to_date
-        }
-    });
+    const [getCountryDailyIncrease, { error, loading, data }] = useLazyQuery(GET_COUNTRY_DAILY_INCREASE);
+    
+    useEffect(() => {
+        const { country, from_date, to_date } = filters
+        getCountryDailyIncrease({
+            variables: {
+                country,
+                from_date,
+                to_date
+            }
+        })
+    }, [filters]);
 
     return (
         <Grid container className={classes.gridContainer} spacing={2}>

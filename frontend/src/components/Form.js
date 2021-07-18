@@ -4,6 +4,7 @@ import { TextField, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
+import { dateToString } from '../functions';
 // GraphQL
 import { useQuery } from '@apollo/client';
 import { GET_COUNTRIES } from '../GraphQL/Queries';
@@ -49,14 +50,26 @@ function Form() {
             .test("pandemicTimes", "Select a date after 01/04/2020", validatePandemicDate)
             .required('Choose a date')
     });
-
+    
     const formik = useFormik({
         initialValues: {
             country: 'Argentina',
             date: today
         },
         validationSchema: validationSchema,
-        onSubmit: (values) => setFilters(values)
+        onSubmit: (values) => {
+            const to = new Date(values.date.valueOf());
+            to.setDate(to.getDate() - 1);
+
+            const from = new Date(values.date.valueOf());
+            from.setDate(from.getDate() - 1);
+            from.setMonth(from.getMonth() - 1);
+
+            values.to_date = dateToString(to)
+            values.from_date = dateToString(from)
+            values.today = today
+            setFilters(values)
+        }
     });
 
     function validatePresentDate() {
