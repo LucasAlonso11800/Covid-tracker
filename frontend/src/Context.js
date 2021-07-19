@@ -3,7 +3,8 @@ import { dateToString } from './functions';
 
 export const GlobalContext = createContext();
 
-const today = new Date()
+const localDate = new Date().setMinutes(new Date().getUTCMinutes() - new Date().getTimezoneOffset())
+const today = new Date(localDate)
 
 const to = new Date(today.valueOf());
 to.setDate(today.getDate() - 1);

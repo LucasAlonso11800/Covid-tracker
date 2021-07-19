@@ -31,7 +31,7 @@ export const GET_DATES = gql`
             to_date: $to_date
         )
     }
-`
+`;
 
 export const GET_COUNTRIES = gql`
     query countries(
@@ -41,7 +41,7 @@ export const GET_COUNTRIES = gql`
             date: $date,
         )
     }
-`
+`;
 
 export const GET_GLOBAL_DATA = gql`
     query globalData(
@@ -56,7 +56,7 @@ export const GET_GLOBAL_DATA = gql`
             today_deaths
         }
     }
-`
+`;
 
 export const GET_COUNTRY_TOTALS = gql`
     query countryTotals(
@@ -75,4 +75,22 @@ export const GET_COUNTRY_TOTALS = gql`
             total_deaths
         }
     }
-`
+`;
+
+export const GET_COUNTRY_DAILY_INFO = gql`
+    query countryDailyInfo(
+        $country: String!
+        $from_date: String!
+        $to_date: String!
+    )   {
+        countryDailyInfo(
+            country: $country,
+            from_date: $from_date,
+            to_date: $to_date
+        ){
+            new_confirmed
+            new_recovered
+            new_deaths
+        }
+    }
+`;

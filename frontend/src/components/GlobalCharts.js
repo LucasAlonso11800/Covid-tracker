@@ -33,11 +33,11 @@ const useStyles = makeStyles(() => ({
 
 function GlobalCharts() {
     const classes = useStyles();
-    const [{ today }, setFilters] = useContext(GlobalContext);
-    const { loading, data } = useQuery(GET_GLOBAL_DATA, {
-        variables: { date: today }
+    const [{ today, to_date }, setFilters] = useContext(GlobalContext);
+    const { error, loading, data } = useQuery(GET_GLOBAL_DATA, {
+        variables: { date: to_date }
     });
-    
+
     return (
         <Grid container className={classes.gridContainer}>
             <Grid item className={classes.gridItem} xs={12}>

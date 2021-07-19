@@ -36,10 +36,10 @@ const useStyles = makeStyles((theme) => ({
 
 function Form() {
     const [{ today }, setFilters] = useContext(GlobalContext);
-    const { loading, data } = useQuery(GET_COUNTRIES, {
+    const { error, loading, data } = useQuery(GET_COUNTRIES, {
         variables: { date: today }
     });
-
+    console.log(error, loading, data)
     const classes = useStyles();
 
     const validationSchema = yup.object({
@@ -136,6 +136,7 @@ function Form() {
                         {c}
                     </option>
                 })}
+                <option></option>
             </TextField>
             <TextField
                 label='Date'

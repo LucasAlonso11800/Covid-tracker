@@ -11,7 +11,8 @@ const GET_GLOBAL_DATA = {
     },
     async resolve(parent, args){
         const data = await (await axios.get(`${initialURL}/${args.date}`)).data
-        console.log(args)
+        console.log(data)
+        console.log('global', args)
         return data.total
     }
 };
