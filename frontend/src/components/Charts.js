@@ -47,9 +47,9 @@ function Charts() {
         }
     }
 
-    const { error: datesError, data: datesData } = useQuery(GET_DATES, variables)
-    const [getCountryDailyInfo, { error: dailyError, loading: dailyLoading, data: dailyData }] = useLazyQuery(GET_COUNTRY_DAILY_INFO);
-    const [getCountryTotals, { error: totalsError, loading: totalsLoading, data: totalsData }] = useLazyQuery(GET_COUNTRY_TOTALS);
+    const { data: datesData } = useQuery(GET_DATES, variables)
+    const [getCountryDailyInfo, { loading: dailyLoading, data: dailyData }] = useLazyQuery(GET_COUNTRY_DAILY_INFO);
+    const [getCountryTotals, { loading: totalsLoading, data: totalsData }] = useLazyQuery(GET_COUNTRY_TOTALS);
 
     useEffect(() => {
         getCountryDailyInfo(variables)

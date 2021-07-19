@@ -39,7 +39,7 @@ function Form() {
     const { error, loading, data } = useQuery(GET_COUNTRIES, {
         variables: { date: today }
     });
-    console.log(error, loading, data)
+
     const classes = useStyles();
 
     const validationSchema = yup.object({

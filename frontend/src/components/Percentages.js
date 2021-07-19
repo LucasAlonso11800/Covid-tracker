@@ -56,7 +56,7 @@ function Percentages() {
     const classes = useStyles();
     const [filters, setFilters] = useContext(GlobalContext);
 
-    const [getCountryDailyIncrease, { error, loading, data }] = useLazyQuery(GET_COUNTRY_DAILY_INCREASE);
+    const [getCountryDailyIncrease, { loading, data }] = useLazyQuery(GET_COUNTRY_DAILY_INCREASE);
 
     useEffect(() => {
         const { country, from_date, to_date } = filters
